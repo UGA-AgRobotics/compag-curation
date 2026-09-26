@@ -1,22 +1,72 @@
-# COMPAG Curation 1.9.4rc10 — start here
+# COMPAG Curation
 
-The latest launcher update adds **Export COCO ZIP** for saved analyses, **Stop analysis / Stop training**, and explicit Paper protocol readiness checks. Existing R5.3 users only need to restart the guide. See [export and stop instructions](EXPORT_STOP_UPDATE.md).
+Software companion to our COMPAG paper on human-in-the-loop pest monitoring with sticky-trap cards. You analyze a card, review the candidate detections, and train an XGBoost model that is then used on the next card.
 
-After cloning this repository, run **`python3 start_compag.py`** from this folder. It opens a **local page in your web browser** and walks you through checking the four files included in `bundled-assets/`, installing the pinned GPU environment, analyzing a card, reviewing its candidates, and explicitly training XGBoost for the next card. The page also lets you attach an existing one-class YOLO segmentation checkpoint for optional detector support during the next analysis. You do not need a separate Release download or a path for the four included files. The terminal menu remains available with `python3 start_compag.py --text`. See [Start Here](START_HERE_EN.md).
+## Quick start
 
-This local source revision retains the browser training-policy choice, guarded paper-settings XGBoost training helper, and automatic setup and activation of an existing YOLO segmentation checkpoint for inference. The checkpoint is not retrained by this browser workflow. R5.3 aligns the optional XGBoost/YOLO hybrid decision and browser mode names with the paper; the canonical YOLO-disabled run remains XGBoost-only. R5.4 advances the application to 1.9.4rc10 and rebuilds its matching wheel; rerun setup to install the new version. See [current R5.4 release notes](PUBLIC_RELEASE_NOTES_RC10_R5_4.md) and the retained [R5.3 history](PUBLIC_RELEASE_NOTES_RC9_R5_3.md).
+After cloning, run this from the repository folder:
 
-## Release and research details
+```bash
+python3 start_compag.py
+```
 
-This is a versioned software companion containing retained scientific source, documented release adaptations and the identified r92 asset. It does not claim that the new launcher/export/Stop code generated historical paper results.
+This opens a local page in your browser that walks you through:
 
-This is packaging revision `rc10-repair-r5.4` of application 1.9.4rc10. The optional, user-supplied one-class CJ YOLO segmentation checkpoint (Ultralytics 8.4.26) remains an external local asset. The browser guide can prepare a separate, hash-pinned YOLO environment, verify that checkpoint, and use its boxes and confidences in SAM2 prompting and XGBoost/YOLO fusion. In the paper hybrid policy, a valid YOLO match requires confidence at least 0.20 and box overlap at least 0.60. A candidate without valid YOLO support is rejected by the hybrid decision, while its review score uses the raw XGBoost probability. YOLO instance masks are verified but not inserted as proposals. The rc8 right-button reviewer pan and R5.2 review zoom continuity remain available. This staged repository includes the matching wheel and sidecar, immutable native r92 model ZIP, and exactly ten original full-card photos in a separate ZIP under `bundled-assets/`. The browser guide checks these included files automatically. No live URL, tag, or repository slug is asserted.
+1. checking the four files in `bundled-assets/`
+2. installing the pinned GPU environment
+3. analyzing a card
+4. reviewing its candidates
+5. training XGBoost for the next card
 
-The author selected MIT for author-created application code and CC BY 4.0 for author-created documentation, the exact model, and the selected ten photographs. See [LICENSES.md](LICENSES.md), [the asset addendum](ASSET_LICENSES/PUBLIC_ASSET_SCOPE_EN.md), and [the photo manifest](PUBLIC_PHOTO_MANIFEST.json). Rights-holder and institutional/coauthor approvals are not attested. No other research data, images, annotations, logs, or newly fitted model weights are in this public set.
+Everything you need is already in `bundled-assets/`, so there's nothing extra to download and no paths to set. If you have a one-class YOLO segmentation checkpoint, you can attach it on the same page and it will be used as detector support in the next analysis.
 
-## Prepare all ten included example cards
+If you'd rather stay in the terminal, use `python3 start_compag.py --text`.
 
-The start guide handles these commands for newcomers. Advanced users can use the Python 3.12 science-GPU environment documented in [FIRST_RUN_COMPLETE_ROUND_EN.md](FIRST_RUN_COMPLETE_ROUND_EN.md), with Pillow 12.3.0. From a clone containing `bundled-assets/`:
+## Features
+
+- guided setup and a complete review round in the browser
+- two XGBoost training modes (see below), with readiness checks before training in Paper protocol mode
+- a guarded helper for training XGBoost with the paper settings
+- **Stop analysis** and **Stop training** buttons
+- **Export COCO ZIP** for saved analyses
+- optional YOLO support using an existing checkpoint
+- zoom and right-button panning in the reviewer
+
+## What's in the repository
+
+- the research source code
+- the application wheel and its sidecar
+- the inference model ZIP, byte-identical to the original
+- a ZIP with ten full-card example photos
+
+Nothing else from the project is included: no other images, annotations, logs, or trained weights. The YOLO checkpoint isn't included either; you need to supply your own.
+
+The launcher, COCO export, and Stop buttons were added after the paper, so they weren't used to produce the results reported there.
+
+## Training XGBoost
+
+The browser offers two training modes:
+
+- **Operational** fits on all eligible review decisions. There's no holdout and no cross-validation.
+- **Paper protocol** uses group-safe search and validation on newly reviewed cards, and doesn't accept bulk-accepted predictions. It needs at least six independent original-card groups, both classes, valid train/held-out groups, and five valid training folds.
+
+Keep in mind that having a trained model doesn't tell you anything about biological accuracy on its own.
+
+## Optional YOLO support
+
+You can plug in your own one-class CJ YOLO segmentation checkpoint trained with Ultralytics. The guide sets up a separate, hash-pinned environment for it, verifies the checkpoint, and then uses its boxes and confidences for SAM2 prompting and for XGBoost/YOLO fusion. The checkpoint is only used for inference; this workflow doesn't retrain YOLO.
+
+The hybrid decision follows the paper:
+
+- A YOLO match counts only if confidence is at least 0.20 and box overlap is at least 0.60.
+- Candidates without a valid YOLO match are rejected by the hybrid decision. Their review score still shows the raw XGBoost probability.
+- YOLO instance masks are checked but aren't added as proposals.
+
+With YOLO turned off, the run is XGBoost-only, which is the canonical setup. For setup details and the next-card pipeline, see [EXTERNAL_YOLO_SEGMENT_INTEGRATION_EN.md](EXTERNAL_YOLO_SEGMENT_INTEGRATION_EN.md).
+
+## Preparing the ten example cards by hand
+
+The start guide runs these steps for you. If you want to do it yourself, set up the science-GPU environment described in [FIRST_RUN_COMPLETE_ROUND_EN.md](FIRST_RUN_COMPLETE_ROUND_EN.md), then run:
 
 ```bash
 PREFIX=/absolute/path/to/installed-science-gpu-env
@@ -33,10 +83,16 @@ CARD2="$EXAMPLE/cards/IMG_9319"
 "$PREFIX/bin/compag-curation" r92 verify --model "$MODEL"
 ```
 
-The helper checks exact hashes and ZIP membership, decodes every JPEG, and writes `EXAMPLE_INPUTS.json` plus stable `cards/IMG_####/` directories for all ten cards. It rejects a pre-existing output. The first/next-card walkthrough in the complete-round guide uses two distinct cards; all ten remain available for the same full-card workflow. All candidate proposals can be reviewed, deleted or bulk accepted as documented. The browser offers two explicit XGBoost choices: **Operational** fits all eligible decisions with no holdout or cross-validation; **Paper protocol** uses group-safe search and validation on newly reviewed cards and rejects bulk-accepted predictions. It requires at least six independent original-card groups, both classes, valid train/heldout groups and five valid training folds. A trained model is not evidence of biological accuracy. The optional browser YOLO path uses a previously trained checkpoint for inference; it does not train YOLO. The synthetic `r92 sample` check does not constitute biological validation or genuine human review.
+The helper checks file hashes and ZIP contents, makes sure every JPEG decodes, and writes `EXAMPLE_INPUTS.json` along with one `cards/IMG_####/` folder per card. It won't write into an output folder that already exists.
 
-The ten images are author-selected public examples. Their membership in any paper ten-card audit has not been established. The original r92 model ZIP remains byte-identical. This is a local staged candidate; no remote release or no-login test has occurred.
+The walkthrough in the complete-round guide uses two different cards (a first card and a next card), but all ten work the same way. Candidate proposals can be reviewed one by one, deleted, or bulk-accepted.
 
-`CAPABILITY_STATUS.json` retains the dated rc6 capability record for historical context. The paper hybrid update is recorded in [PUBLIC_RELEASE_NOTES_RC9_R5_3.md](PUBLIC_RELEASE_NOTES_RC9_R5_3.md); the reviewer zoom fix is recorded in [PUBLIC_RELEASE_NOTES_RC9_R5_2.md](PUBLIC_RELEASE_NOTES_RC9_R5_2.md); the Python 3.10 browser fix is recorded in [PUBLIC_RELEASE_NOTES_RC9_R5_1.md](PUBLIC_RELEASE_NOTES_RC9_R5_1.md). The R5 workflow is documented in [PUBLIC_RELEASE_NOTES_RC9_R5.md](PUBLIC_RELEASE_NOTES_RC9_R5.md), and the original YOLO adapter in [PUBLIC_RELEASE_NOTES_RC9.md](PUBLIC_RELEASE_NOTES_RC9.md).
+The included sample check runs on synthetic data, so treat it as a technical check only. It isn't a biological validation, and it doesn't replace real human review.
 
-For the external YOLO checkpoint and next-card pipeline, see [EXTERNAL_YOLO_SEGMENT_INTEGRATION_EN.md](EXTERNAL_YOLO_SEGMENT_INTEGRATION_EN.md). The external weight is not a GitHub Release asset.
+## About the example photos
+
+The ten photos were picked by the author as public examples. We haven't checked whether they overlap with the ten cards audited in the paper.
+
+## License
+
+Application code is MIT. The documentation, the included model, and the ten example photos are CC BY 4.0. See [LICENSES.md](LICENSES.md), the asset addendum, and the photo manifest.
