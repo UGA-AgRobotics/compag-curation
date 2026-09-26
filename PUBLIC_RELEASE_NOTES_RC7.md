@@ -1,0 +1,7 @@
+# COMPAG Curation 1.9.4rc7 — local public release candidate
+
+Rc7 repairs an observed stop on the thirteenth tile of public card IMG_9317. A nonempty SAM2 mask can have no area-bearing external contour after OpenCV approximation. Inference now retains that candidate and its exact canonical mask, numerical features and score. Its polygon field is empty so the existing reviewer draws the mask-derived bounding box. The full-inference receipt reports `polygon_bbox_fallback_count` for each tile and in total. Empty masks, malformed shapes and invalid fallback boxes remain errors.
+
+The native r92 model archive (SHA-256 `fffef7a85192b99dcca3bcc5750215150d2ca9659121363198041244bbfe57c1`) and ten-photo archive (SHA-256 `344c8d767a1719403a3713e0f51587971f4ab9ea18e1d1a44034ed72c9297914`) are reused byte-for-byte from rc6 R3. Candidate selection, classifier probabilities, threshold, source masks and XGBoost/YOLO training rules have not changed. The old run stopped before producing a final scored result, so there is no completed rc6 IMG_9317 output to compare byte-for-byte.
+
+This new application version deliberately changes the per-tile checkpoint code identity. Keep prior rc6 R3 checkpoints for provenance and use a new checkpoint directory and output path with rc7. The public release remains locally staged. Remote publication, guest access, rights-holder sign-off and biological accuracy are not asserted.

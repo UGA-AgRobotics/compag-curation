@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:compag-curation:review-table:v2",
+  "title": "COMPAG proposal review row",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["proposal_id", "proposal_sha256", "image_id", "image_sha256", "group_id", "label", "review_status"],
+  "properties": {
+    "proposal_id": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "proposal_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "image_id": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "image_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "group_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,63}$"},
+    "label": {"enum": ["", "0", "1"]},
+    "review_action": {"enum": ["", "accept", "flip", "sus_accept", "sus_flip", "skip"]},
+    "review_weight": {"enum": ["", "0.0", "0.4", "1.0"]},
+    "review_status": {"enum": ["pending", "reviewed"]}
+  },
+  "oneOf": [
+    {
+      "not": {"anyOf": [{"required": ["review_action"]}, {"required": ["review_weight"]}]},
+      "oneOf": [
+        {"properties": {"label": {"const": ""}, "review_status": {"const": "pending"}}},
+        {"properties": {"label": {"enum": ["0", "1"]}, "review_status": {"const": "reviewed"}}}
+      ]
+    },
+    {
+      "required": ["review_action", "review_weight"],
+      "oneOf": [
+        {
+          "properties": {
+            "label": {"const": ""},
+            "review_action": {"const": ""},
+            "review_weight": {"const": ""},
+            "review_status": {"const": "pending"}
+          }
+        },
+        {
+          "properties": {
+            "label": {"enum": ["0", "1"]},
+            "review_status": {"const": "reviewed"}
+          },
+          "oneOf": [
+            {"properties": {"review_action": {"enum": ["accept", "flip"]}, "review_weight": {"const": "1.0"}}},
+            {"properties": {"review_action": {"enum": ["sus_accept", "sus_flip"]}, "review_weight": {"const": "0.4"}}},
+            {"properties": {"review_action": {"const": "skip"}, "review_weight": {"const": "0.0"}}}
+          ]
+        }
+      ]
+    }
+  ]
+}

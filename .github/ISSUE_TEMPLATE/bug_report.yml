@@ -1,0 +1,58 @@
+name: Bug report
+description: Report a reproducible software or documentation defect
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Do not attach private images, annotations, models, credentials, or author-local paths.
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      placeholder: "1.9.3"
+    validations:
+      required: true
+  - type: dropdown
+    id: profile
+    attributes:
+      label: Installation profile
+      options:
+        - base
+        - quick-demo
+        - science-gpu
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command and observed exit code
+      description: Redact private paths and tokens before submitting.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include OS, architecture, exact Python version, NVIDIA GPU/driver, and science-gpu doctor output with sensitive values removed. State clearly if the report concerns only base or quick-demo.
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy confirmation
+      options:
+        - label: I removed private data, credentials, local paths, and model files from this report.
+          required: true

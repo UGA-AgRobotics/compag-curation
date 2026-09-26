@@ -1,0 +1,35 @@
+{
+  "boundary": "PUBLIC_EXECUTABLE_SOURCE_WITH_SELECTED_R92_AND_TEN_PHOTO_ASSETS; HISTORICAL_REPLAY_DATA_CONTROLLED_SEPARATELY",
+  "claims_not_made": [
+    "universal exact historical fit replay",
+    "public research-data availability",
+    "completed JR10",
+    "all-figure executable reproduction"
+  ],
+  "data_location": "Request the exact full reviewer companion through the corresponding author or approved confidential reviewer/controlled-access channel; no anonymous availability is asserted.",
+  "lanes": {
+    "ABLATION": "20 reviewer-only probability CSV.gz files and locked split/config records",
+    "JR04": "saved candidate scores, point XML, proposals, tile indices",
+    "JR06": "sanitized effort events/review labels and saved mask geometry",
+    "JR07": "retained runtime tables and receipts; no new timing",
+    "JR08": "author-selected gallery sources and sanitized manifests",
+    "OPTIONAL_R2": "fixed-r92 pickle + tile_preds colocated; PRESENT_NOT_EXECUTED"
+  },
+  "schema": "jr09-public-paper-reproduction-input-contracts/v1",
+  "current_JR04_profile": {
+    "name": "reviewer-full-20260925-v1",
+    "archive": "EVIDENCES_REVIEWER_ZENODO.zip",
+    "sha256": "2095e43ce003fc80be84e12e08aa23d20c30fb99c1307a70244e3cbc1c0746a2",
+    "bytes": 1258488519,
+    "extracted_root": "EVIDENCES",
+    "member_manifest": "jr04/REVIEWER_FULL_20260925_PROFILE.json",
+    "command": "python -B paper_reproduction/jr04/reproduce_current_profile.py --inputs /path/to/EVIDENCES --out /path/to/new-output",
+    "boundary": "Saved-score candidate metrics, unchanged shared verifiers and rendering; no refit, new probabilities, or vision inference."
+  },
+  "historical_JR04_profile": {
+    "command": "jr04/reproduce_jr04.py",
+    "required_companion": "PAPER_EVIDENCE_R92_REVIEWER_ONLY_CANDIDATE_CONTRACT_FIX_R1_20260924T031107Z.zip",
+    "sha256": "6dc38a632051020619d0b2f6c206e577b6b335227f1f50023db89b800b5a8463",
+    "status": "Original pins retained; exact historical byte closure not supplied by the current sanitized derivative."
+  }
+}

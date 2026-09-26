@@ -1,0 +1,3 @@
+# CPython 3.12 Linux x86-64 r92 CPU scorer. All wheels pinned to original SHA-256.
+scipy @ https://files.pythonhosted.org/packages/53/11/a0160990b82999b45874dc60c0c183d3a3a969a563fffc476d5a9995c407/scipy-1.16.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl#sha256=f66bd07ba6f84cd4a380b41d1bf3c59ea488b590a2ff96744845163309ee8e2f
+xgboost-cpu @ https://files.pythonhosted.org/packages/d4/76/9f76e4cfa098d93d783d89d697adc7a5fbaf25fb88e38e3e766d469b9d7b/xgboost_cpu-2.1.1-py3-none-manylinux2014_x86_64.whl#sha256=b81035bfe83542bcad54eac0ef901d42a56798f9709990bdbdcbace93ef2fa34

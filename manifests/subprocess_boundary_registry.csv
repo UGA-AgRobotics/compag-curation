@@ -1,0 +1,5 @@
+relative_file,symbol,purpose,allowed_command_class,injected_runner_required,import_form
+src/compag_curation/domain/evaluation/coverage.py,LocalCoverageRunner.run,Invoke an explicitly configured local coverage evaluator,LOCAL_PYTHON_EVALUATOR,YES,from subprocess import run
+src/compag_curation/domain/inference.py,LocalCommandRunner.run,Invoke an explicitly configured local inference launcher,LOCAL_PYTHON_INFERENCE,YES,from subprocess import run
+src/compag_curation/domain/transfer.py,LocalTransferRunner.run,Invoke an explicitly configured local transfer command,LOCAL_TRANSFER_COMMAND,YES,from subprocess import run
+src/compag_curation/review/web.py,LocalReviewPageOpener.run,Open the loopback-only review application in a local desktop browser,LOCAL_REVIEW_PAGE_OPENER,YES,import subprocess

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "path_count": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "path_encoding": {
+      "const": "UTF8_NFC_POSIX_RELATIVE_SORTED_LF_TERMINATED"
+    },
+    "paths": {
+      "items": {
+        "minLength": 1,
+        "pattern": "^[\\x20-\\x7e]+$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "paths_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "policy": {
+      "const": "DENY_BY_DEFAULT_EXACT_REGULAR_FILES"
+    },
+    "release_version": {
+      "const": "1.9.3"
+    },
+    "schema": {
+      "const": "compag-curation-public-release-allowlist/v1"
+    }
+  },
+  "required": [
+    "schema",
+    "policy",
+    "release_version",
+    "path_encoding",
+    "path_count",
+    "paths_sha256",
+    "paths"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,118 @@
+{
+  "schema": "compag-current-jr04-input-profile/v1",
+  "profile": "reviewer-full-20260925-v1",
+  "companion_archive": "EVIDENCES_REVIEWER_ZENODO.zip",
+  "companion_sha256": "2095e43ce003fc80be84e12e08aa23d20c30fb99c1307a70244e3cbc1c0746a2",
+  "companion_bytes": 1258488519,
+  "candidate": {
+    "checkpoint_scores_all_rounds.csv": {
+      "member": "evidence/r92_candidate_audit/results/checkpoint_scores_all_rounds.csv",
+      "sha256": "5fa304558685bb8a5ab6d056b83e05277c3ed5139eced417afd5a5e32317102a",
+      "historical_sha256": "5fa304558685bb8a5ab6d056b83e05277c3ed5139eced417afd5a5e32317102a"
+    },
+    "learning_curve_table__xgb_recall.csv": {
+      "member": "replay/jr04/inputs/candidate/learning_curve_table__xgb_recall.csv",
+      "sha256": "d7bb395fcc3654e8056df9a49d1e680f445c78c5e29852b2f9680b946ea3c06c",
+      "historical_sha256": "f016a1c3292353444679dfbac2c35bfb2149cb2eeabb5a7c19e219e37ab59f6e"
+    },
+    "model_metrics__xgb_recall.csv": {
+      "member": "replay/jr04/inputs/candidate/model_metrics__xgb_recall.csv",
+      "sha256": "ee6b2fab7e01c7885fa376373abc7ce475b6e65c888290a6f96f39c852f5c9c1",
+      "historical_sha256": "b95e0b83869b09d689e92a5fef17f420c74d06d00732bbcd4b2e5e4030409f35"
+    },
+    "model_scoring_diagnostics.tsv": {
+      "member": "evidence/r92_candidate_audit/results/model_scoring_diagnostics.tsv",
+      "sha256": "946c68c8d1b0eb7b9163884fde227d522d6a2177cd0d5145d3aac5a0f3f95975",
+      "historical_sha256": "99ed8045dc2570a7166cea0e0205a5d309172ddd636d216aae8c4ab185d00e4b"
+    },
+    "scored_candidates_r92.csv": {
+      "member": "evidence/r92_candidate_audit/results/scored_candidates_r92.csv",
+      "sha256": "b27eee34994efb5af61cd618b27712dd5120e363d4606019a7b0daabebe7a55c",
+      "historical_sha256": "b27eee34994efb5af61cd618b27712dd5120e363d4606019a7b0daabebe7a55c"
+    },
+    "supp_table_s2_reconciled_raw_and_weighted.csv": {
+      "member": "evidence/r92_candidate_audit/results/supp_table_s2_reconciled_raw_and_weighted.csv",
+      "sha256": "3c24c7dd9e73295904c7d9bdafd26b2c7f56307bebded9fbf6341a37421fc18a",
+      "historical_sha256": "3c24c7dd9e73295904c7d9bdafd26b2c7f56307bebded9fbf6341a37421fc18a"
+    },
+    "table4_reconciled_raw_and_weighted.csv": {
+      "member": "evidence/r92_candidate_audit/results/table4_reconciled_raw_and_weighted.csv",
+      "sha256": "ccc7472ed43bcf06801fbd17199a4269695bad7cef38c2355a8efd6583f3ce22",
+      "historical_sha256": "e2447a22ff85e54d99cd9e376c56f4c953d9d2f04bdbd55f17aac0361421fcb2"
+    }
+  },
+  "point_pins_member": "replay/jr04/contracts/POINT_DERIVATIVE_INPUT_PINS.json",
+  "point_pins_sha256": "60f455deb8512d89a7e4ee21a6da55607197c8a52419e7d60e45048c94c0af9f",
+  "point_inputs_member": "replay/jr04/inputs/point",
+  "code_sha256": {
+    "verify_JR04_saved_metrics.py": "60a94c8da891b90137104e029d2f03c5bb2221b636ae1cad976054dc9d51694b",
+    "run_s3_v1.py": "bbfc111d10ab94ecac784b47cbfd511a449f132cf6b8a0587e1b9841961d3ee9",
+    "make_jr04_outputs.py": "bfd74840c8823d1c6f320138be5ca6f9d84b5c396f9e1c1cbd372f2881007d2d"
+  },
+  "unchanged_numerical_inputs": [
+    "checkpoint_scores_all_rounds.csv",
+    "scored_candidates_r92.csv",
+    "supp_table_s2_reconciled_raw_and_weighted.csv"
+  ],
+  "table4_path_crosswalk": [
+    {
+      "round": 92,
+      "from": "/REVIEWER_INPUT_ROOT/cj_ultra_tilesafe_xgb_r92_hybrid.pkl",
+      "to": "r92_hybrid/cj_ultra_tilesafe_xgb_r92_hybrid.pkl"
+    },
+    {
+      "round": 76,
+      "from": "/REVIEWER_INPUT_ROOT/cj_ultra_tilesafe_xgb_r76_hybrid.pkl",
+      "to": "r76_hybrid/cj_ultra_tilesafe_xgb_r76_hybrid.pkl"
+    },
+    {
+      "round": 106,
+      "from": "/REVIEWER_INPUT_ROOT/cj_ultra_tilesafe_xgb_r106_hybrid.pkl",
+      "to": "r106_hybrid/cj_ultra_tilesafe_xgb_r106_hybrid.pkl"
+    },
+    {
+      "round": 73,
+      "from": "/REVIEWER_INPUT_ROOT/cj_ultra_tilesafe_xgb_r73_hybrid.pkl",
+      "to": "r73_hybrid/cj_ultra_tilesafe_xgb_r73_hybrid.pkl"
+    },
+    {
+      "round": 121,
+      "from": "/REVIEWER_INPUT_ROOT/cj_ultra_tilesafe_xgb_r121_hybrid.pkl",
+      "to": "r121_hybrid/cj_ultra_tilesafe_xgb_r121_hybrid.pkl"
+    },
+    {
+      "round": 82,
+      "from": "/REVIEWER_INPUT_ROOT/cj_ultra_tilesafe_xgb_r82_hybrid.pkl",
+      "to": "r82_hybrid/cj_ultra_tilesafe_xgb_r82_hybrid.pkl"
+    },
+    {
+      "round": 112,
+      "from": "/REVIEWER_INPUT_ROOT/cj_ultra_tilesafe_xgb_r112_hybrid.pkl",
+      "to": "r112_hybrid/cj_ultra_tilesafe_xgb_r112_hybrid.pkl"
+    },
+    {
+      "round": 110,
+      "from": "/REVIEWER_INPUT_ROOT/cj_ultra_tilesafe_xgb_r110_hybrid.pkl",
+      "to": "r110_hybrid/cj_ultra_tilesafe_xgb_r110_hybrid.pkl"
+    },
+    {
+      "round": 74,
+      "from": "/REVIEWER_INPUT_ROOT/cj_ultra_tilesafe_xgb_r74_hybrid.pkl",
+      "to": "r74_hybrid/cj_ultra_tilesafe_xgb_r74_hybrid.pkl"
+    },
+    {
+      "round": 53,
+      "from": "/REVIEWER_INPUT_ROOT/cj_ultra_tilesafe_xgb_r53_hybrid.pkl",
+      "to": "r53_hybrid/cj_ultra_tilesafe_xgb_r53_hybrid.pkl"
+    }
+  ],
+  "adapted_candidate_sha256": {
+    "checkpoint_scores_all_rounds.csv": "5fa304558685bb8a5ab6d056b83e05277c3ed5139eced417afd5a5e32317102a",
+    "learning_curve_table__xgb_recall.csv": "d7bb395fcc3654e8056df9a49d1e680f445c78c5e29852b2f9680b946ea3c06c",
+    "model_metrics__xgb_recall.csv": "ee6b2fab7e01c7885fa376373abc7ce475b6e65c888290a6f96f39c852f5c9c1",
+    "model_scoring_diagnostics.tsv": "946c68c8d1b0eb7b9163884fde227d522d6a2177cd0d5145d3aac5a0f3f95975",
+    "scored_candidates_r92.csv": "b27eee34994efb5af61cd618b27712dd5120e363d4606019a7b0daabebe7a55c",
+    "supp_table_s2_reconciled_raw_and_weighted.csv": "3c24c7dd9e73295904c7d9bdafd26b2c7f56307bebded9fbf6341a37421fc18a",
+    "table4_reconciled_raw_and_weighted.csv": "932e4755b21c1faa65f89db06981c3c6e7be00cf04b45c30f4f2f10151236340"
+  }
+}

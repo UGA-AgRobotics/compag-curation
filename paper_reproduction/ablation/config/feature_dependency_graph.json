@@ -1,0 +1,26 @@
+{
+  "closure_rule": "Remove a predictor when its primary group or any transitive family dependency is removed; never recompute a partial composite.",
+  "dependencies": {
+    "g_quality": [
+      "color",
+      "deep_pca",
+      "deep_similarity",
+      "shape_morphology",
+      "spatial_context",
+      "texture"
+    ],
+    "g_robust": [
+      "shape_morphology",
+      "spatial_context",
+      "texture"
+    ]
+  },
+  "families": [
+    "color",
+    "shape_morphology",
+    "texture",
+    "spatial_context",
+    "deep_pca",
+    "deep_similarity"
+  ]
+}

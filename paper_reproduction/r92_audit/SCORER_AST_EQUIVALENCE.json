@@ -1,0 +1,12 @@
+{
+  "derivative_sha256": "d9bb7eca020ee3f84bdefd262e827388844a2a591cde9f27e125ab148a913676",
+  "equivalent": true,
+  "function_ast_sha256": {
+    "load_and_clean_testset": "de1bea3230a34dc22c540483894def0f7b8162eef7cc5dd3395f4f9f0f7abc39",
+    "normalize_image_name": "deffff7e16ed73dbd8c00804ba65450d1b906051d42291dd65d366a8afb3d048",
+    "original_card": "b4ce41ee3796601b7ef66dc5c7732e4e475c9fd7bcb8c8b1586f57c8059c0b85"
+  },
+  "original_sha256": "a4b99996275eaace69f9d25e342d04060602bf47dc802b720b807bc4ee5d0d87",
+  "schema": "jr09-scorer-ast-equivalence/v1",
+  "scope": "Only the three functions extracted by the optional R2 verifier; no execution or model load."
+}

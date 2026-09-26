@@ -1,0 +1,27 @@
+{
+  "assignment_and_within_split_order_preserved": true,
+  "base_seed": 42,
+  "classification": "VERIFIED",
+  "counts": {
+    "training": {
+      "cards": 66,
+      "positive": 75036,
+      "rows": 291024
+    },
+    "validation": {
+      "cards": 18,
+      "positive": 15952,
+      "rows": 56843
+    },
+    "validation_ineligible_border_rows": 15696
+  },
+  "locked_for_scientific_use": true,
+  "overlaps": {
+    "development_vs_external_audit": 0,
+    "training_vs_validation": 0
+  },
+  "source_review_zip_sha256": "fb2f41f2e38efa8a8a58f6107a7df935c254bfb049d8ef7e10ed85640cf3da48",
+  "split_assignment_sha256": "f2cd1570d2c76af49ed52593d95657a3cbbe14d8f2f077edd05447e608698c64",
+  "split_lock_status": "LOCKED",
+  "status": "PASS"
+}

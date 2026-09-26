@@ -1,0 +1,99 @@
+# Laptop candidate: r92 native model is a separate pinned ZIP, never package data.
+[build-system]
+requires = ["setuptools==84.0.0", "wheel==0.48.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "compag-curation"
+version = "1.9.4rc10"
+description = "Runnable, review-gated dataset-curation pipeline for compatible sticky-trap imagery"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = "MIT"
+license-files = [
+  "LICENSE",
+  "LICENSE-CODE-MIT.txt",
+  "LICENSE-DOCS",
+  "LICENSE-CONTENT-CC-BY-4.0.txt",
+  "LICENSES.md",
+  "NOTICE.md",
+  "THIRD_PARTY_NOTICES.md",
+]
+authors = [
+  {name = "Hasan Jahanifar"},
+  {name = "Hasan Mirzakhaninafchi"},
+  {name = "Wesley M. Porter"},
+  {name = "Denis O. Kiobia"},
+  {name = "Glen C. Rains"},
+]
+dependencies = []
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Image Processing",
+]
+
+[project.optional-dependencies]
+quick-demo = [
+  "numpy==2.0.2",
+  "opencv-python==4.12.0.88",
+]
+laptop-review = [
+  "numpy==2.0.2",
+  "opencv-python==4.12.0.88",
+  "pandas==2.2.3",
+]
+r92-sample = [
+  "numpy==2.0.2",
+  "scipy==1.16.2",
+  "xgboost-cpu==2.1.1",
+]
+yolo-local = ["ultralytics==8.3.221"]
+yolo-segment-local = ["ultralytics==8.4.26"]
+science-gpu = [
+  "numpy==2.0.2",
+  "opencv-python==4.12.0.88",
+  "torch @ https://download-r2.pytorch.org/whl/cu132/torch-2.13.0%2Bcu132-cp312-cp312-manylinux_2_28_x86_64.whl#sha256=4c1800e216b46bae03483bc94dd73a23ea43c265ab51f865e28070ca045d10a8",
+  "torchvision @ https://download-r2.pytorch.org/whl/cu132/torchvision-0.28.0%2Bcu132-cp312-cp312-manylinux_2_28_x86_64.whl#sha256=4865f491c69cbb6e0a4ad54d849004974c0a7957b1e183427119c53f09ae5125",
+  "cupy-cuda13x @ https://files.pythonhosted.org/packages/7e/bf/c4c25e97552320451afdcd459d4b6e0b715459594e998b23051c06db64c3/cupy_cuda13x-14.2.0-cp312-cp312-manylinux2014_x86_64.whl#sha256=9aafadbe29db3d4285026044aafeb28f2a3de4bd0df70718ec6892b7d27a4ded",
+  "SAM-2 @ git+https://github.com/facebookresearch/sam2.git@2b90b9f5ceec907a1c18123530e92e794ad901a4",
+  "hydra-core==1.3.5",
+  "omegaconf==2.3.0",
+  "antlr4-python3-runtime==4.9.3",
+  "iopath==0.1.10",
+  "portalocker==3.2.0",
+  "pillow==12.3.0",
+  "pyyaml==6.0.3",
+  "tqdm==4.67.1",
+  "scipy==1.16.2",
+  "scikit-learn==1.7.2",
+  "imbalanced-learn==0.14.0",
+  "pandas==2.3.3",
+  "joblib==1.5.3",
+  "packaging==26.3",
+  "matplotlib==3.10.7",
+  "tabulate==0.9.0",
+  "xgboost @ https://files.pythonhosted.org/packages/20/2f/2ccc91db71096cdb8c5174948db738075d7e38cfece0815500336f6e4ca8/xgboost-2.1.1-py3-none-manylinux_2_28_x86_64.whl#sha256=6475ca35dede1f87d1dc485b362caba08f69f6020f4440e97b167676a533850e",
+]
+dev = ["build==1.3.0", "setuptools==84.0.0", "wheel==0.48.0", "twine==6.2.0"]
+
+[project.scripts]
+compag-curation = "compag_curation.cli:main"
+compag-laptop = "compag_curation.only_codes.guide:run_guide"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.package-data]
+compag_curation = [
+  "resources/*.json",
+  "resources/*.md",
+  "resources/*.txt",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["compag_curation*"]

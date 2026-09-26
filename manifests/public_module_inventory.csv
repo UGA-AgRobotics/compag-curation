@@ -1,0 +1,136 @@
+module,relative_path,surface_class,import_test_required,rationale
+compag_curation,src/compag_curation/__init__.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.__main__,src/compag_curation/__main__.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.assets,src/compag_curation/assets.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.canonical,src/compag_curation/canonical/__init__.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.canonical.active_learning,src/compag_curation/canonical/active_learning.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.canonical.active_learning_facade,src/compag_curation/canonical/active_learning_facade.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.canonical.active_learning_service,src/compag_curation/canonical/active_learning_service.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.canonical.evaluation,src/compag_curation/canonical/evaluation.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.canonical.features,src/compag_curation/canonical/features.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.canonical.full_image,src/compag_curation/canonical/full_image.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.canonical.full_image_features,src/compag_curation/canonical/full_image_features.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.canonical.model_loading,src/compag_curation/canonical/model_loading.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.canonical.preprocessing,src/compag_curation/canonical/preprocessing.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.canonical.proposals,src/compag_curation/canonical/proposals.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.canonical.serialization,src/compag_curation/canonical/serialization.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.canonical.service,src/compag_curation/canonical/service.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.canonical.spec,src/compag_curation/canonical/spec.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.canonical.training,src/compag_curation/canonical/training.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.canonical.transfer_baseline,src/compag_curation/canonical/transfer_baseline.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.canonical.transfer_inference,src/compag_curation/canonical/transfer_inference.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.cli,src/compag_curation/cli.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.config,src/compag_curation/config.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.contracts,src/compag_curation/contracts.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain,src/compag_curation/domain/__init__.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain._shared,src/compag_curation/domain/_shared.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain.evaluation,src/compag_curation/domain/evaluation/__init__.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain.evaluation.border_tiny,src/compag_curation/domain/evaluation/border_tiny.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain.evaluation.coverage,src/compag_curation/domain/evaluation/coverage.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain.evaluation.meta_analysis,src/compag_curation/domain/evaluation/meta_analysis.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain.evaluation.meta_event_statistics,src/compag_curation/domain/evaluation/meta_event_statistics.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain.features,src/compag_curation/domain/features.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain.inference,src/compag_curation/domain/inference.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain.proposals,src/compag_curation/domain/proposals.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain.reporting,src/compag_curation/domain/reporting/__init__.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain.reporting.analysis,src/compag_curation/domain/reporting/analysis.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain.reporting.dataset,src/compag_curation/domain/reporting/dataset.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain.reporting.mask_publication,src/compag_curation/domain/reporting/mask_publication.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain.reporting.orchestration,src/compag_curation/domain/reporting/orchestration.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain.review,src/compag_curation/domain/review.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain.rounds,src/compag_curation/domain/rounds.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain.training,src/compag_curation/domain/training.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.domain.transfer,src/compag_curation/domain/transfer.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.evaluation,src/compag_curation/evaluation/__init__.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.evaluation.border_tiny,src/compag_curation/evaluation/border_tiny.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.evaluation.geometry,src/compag_curation/evaluation/geometry.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.evaluation.meta_analysis,src/compag_curation/evaluation/meta_analysis.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.evaluation.points_coverage,src/compag_curation/evaluation/points_coverage.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.evaluation.points_coverage_base,src/compag_curation/evaluation/points_coverage_base.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.execution,src/compag_curation/execution.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.features,src/compag_curation/features/__init__.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.features.extraction,src/compag_curation/features/extraction.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.inference,src/compag_curation/inference/__init__.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.inference.base_launcher,src/compag_curation/inference/base_launcher.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.inference.orchestration,src/compag_curation/inference/orchestration.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.model_bundle,src/compag_curation/model_bundle.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.only_codes,src/compag_curation/only_codes/__init__.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.only_codes.cli,src/compag_curation/only_codes/cli.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.only_codes.contract,src/compag_curation/only_codes/contract.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.only_codes.doctor,src/compag_curation/only_codes/doctor.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.only_codes.features,src/compag_curation/only_codes/features.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.only_codes.import_ui,src/compag_curation/only_codes/import_ui.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.only_codes.inference,src/compag_curation/only_codes/inference.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.only_codes.inputs,src/compag_curation/only_codes/inputs.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.only_codes.legacy,src/compag_curation/only_codes/legacy/__init__.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.only_codes.legacy.args,src/compag_curation/only_codes/legacy/args.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.only_codes.legacy.defaults,src/compag_curation/only_codes/legacy/defaults.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.only_codes.legacy.gate_core,src/compag_curation/only_codes/legacy/gate_core.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.only_codes.legacy.light_gate,src/compag_curation/only_codes/legacy/light_gate.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.only_codes.legacy.pca_utils,src/compag_curation/only_codes/legacy/pca_utils.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.only_codes.legacy.pipeline,src/compag_curation/only_codes/legacy/pipeline.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.only_codes.legacy.xgb_utils,src/compag_curation/only_codes/legacy/xgb_utils.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.only_codes.merge,src/compag_curation/only_codes/merge.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.only_codes.model_bundle,src/compag_curation/only_codes/model_bundle.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.only_codes.pack,src/compag_curation/only_codes/pack.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.only_codes.project,src/compag_curation/only_codes/project.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.only_codes.review,src/compag_curation/only_codes/review.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.only_codes.review_web,src/compag_curation/only_codes/review_web.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.only_codes.runner,src/compag_curation/only_codes/runner.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.only_codes.safe_joblib,src/compag_curation/only_codes/safe_joblib.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.only_codes.splits,src/compag_curation/only_codes/splits.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.only_codes.state,src/compag_curation/only_codes/state.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.only_codes.state_audit,src/compag_curation/only_codes/state_audit.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.only_codes.training,src/compag_curation/only_codes/training.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.only_codes.workflow,src/compag_curation/only_codes/workflow.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.plan,src/compag_curation/plan.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.point_annotations,src/compag_curation/point_annotations.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.preprocessing,src/compag_curation/preprocessing/__init__.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.preprocessing.yolo_dataset,src/compag_curation/preprocessing/yolo_dataset.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.proposals,src/compag_curation/proposals/__init__.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.proposals.sam2_pipeline,src/compag_curation/proposals/sam2_pipeline/__init__.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.proposals.sam2_pipeline.args,src/compag_curation/proposals/sam2_pipeline/args.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.proposals.sam2_pipeline.defaults,src/compag_curation/proposals/sam2_pipeline/defaults.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.proposals.sam2_pipeline.gate_core,src/compag_curation/proposals/sam2_pipeline/gate_core.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.proposals.sam2_pipeline.light_gate,src/compag_curation/proposals/sam2_pipeline/light_gate.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.proposals.sam2_pipeline.pca_utils,src/compag_curation/proposals/sam2_pipeline/pca_utils.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.proposals.sam2_pipeline.pipeline,src/compag_curation/proposals/sam2_pipeline/pipeline.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.proposals.sam2_pipeline.xgb_utils,src/compag_curation/proposals/sam2_pipeline/xgb_utils.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.provenance,src/compag_curation/provenance.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.public_backend,src/compag_curation/public_backend.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.public_config,src/compag_curation/public_config.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.public_io,src/compag_curation/public_io.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.public_pipeline,src/compag_curation/public_pipeline.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.quick_demo,src/compag_curation/quick_demo.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.registry,src/compag_curation/registry.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.reporting,src/compag_curation/reporting/__init__.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.reporting.dataset_summary,src/compag_curation/reporting/dataset_summary.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.reporting.plots,src/compag_curation/reporting/plots.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.reproducibility,src/compag_curation/reproducibility/__init__.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.reproducibility.source_state,src/compag_curation/reproducibility/source_state.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.reproducibility.transfer,src/compag_curation/reproducibility/transfer.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.review,src/compag_curation/review/__init__.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.review.adapters,src/compag_curation/review/adapters.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.review.al_review_gui,src/compag_curation/review/al_review_gui.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.review.desktop,src/compag_curation/review/desktop.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.review.exchange,src/compag_curation/review/exchange.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.review.facade,src/compag_curation/review/facade.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.review.full_image_review_gui,src/compag_curation/review/full_image_review_gui.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.review.published_model,src/compag_curation/review/published_model.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.review.round_session,src/compag_curation/review/round_session.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.review.scene,src/compag_curation/review/scene.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.review.session,src/compag_curation/review/session.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.review.web,src/compag_curation/review/web.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.review.workflow,src/compag_curation/review/workflow.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.run_state,src/compag_curation/run_state.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.runtime,src/compag_curation/runtime.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.runtime_lock,src/compag_curation/runtime_lock.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.training,src/compag_curation/training/__init__.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.training.safe_smote,src/compag_curation/training/safe_smote.py,OPTIONAL_INTERNAL_BACKEND,NO,Imports heavy optional dependencies only after an authorized facade selects it.
+compag_curation.training.source_paths,src/compag_curation/training/source_paths.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.training.xgb,src/compag_curation/training/xgb.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.training.xgb_nb0001,src/compag_curation/training/xgb_nb0001.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.training.xgb_nb6,src/compag_curation/training/xgb_nb6.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.training.xgb_nb7,src/compag_curation/training/xgb_nb7.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.training.yolo,src/compag_curation/training/yolo.py,PUBLIC_API,YES,Public import-safe API or implementation module.
+compag_curation.version,src/compag_curation/version.py,PUBLIC_API,YES,Public import-safe API or implementation module.

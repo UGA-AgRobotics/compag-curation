@@ -1,0 +1,3 @@
+# Observed CPython 3.12 Linux x86-64 quick-demo closure. Install with --require-hashes --no-deps.
+numpy @ https://files.pythonhosted.org/packages/39/68/e9f1126d757653496dbc096cb429014347a36b228f5a991dae2c6b6cfd40/numpy-2.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl#sha256=0123ffdaa88fa4ab64835dcbde75dcdf89c453c922f18dced6e27c90d1d0ec5a
+opencv-python @ https://files.pythonhosted.org/packages/68/1f/795e7f4aa2eacc59afa4fb61a2e35e510d06414dd5a802b51a012d691b37/opencv_python-4.12.0.88-cp37-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl#sha256=092c16da4c5a163a818f120c22c5e4a2f96e0db4f24e659c701f1fe629a690f9

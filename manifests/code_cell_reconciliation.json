@@ -1,0 +1,27 @@
+{
+  "schema": "compag-code-cell-reconciliation/v2",
+  "total_occurrences": 236,
+  "current_occurrences": 103,
+  "obsolete_or_unrelated_occurrences": 82,
+  "exact_duplicate_occurrences": 51,
+  "disposition_counts": {
+    "DUPLICATE_EXACT": 51,
+    "EXCLUDED_WITH_REASON": 82,
+    "STATICALLY_PORTED": 82,
+    "NON_RUNTIME_DIAGNOSTIC": 19,
+    "MIGRATED_STRUCTURAL": 2
+  },
+  "all_eight_dispositions": {
+    "MIGRATED_EXACT": 0,
+    "MIGRATED_NORMALIZED": 0,
+    "MIGRATED_STRUCTURAL": 2,
+    "STATICALLY_PORTED": 82,
+    "DUPLICATE_EXACT": 51,
+    "NON_RUNTIME_DIAGNOSTIC": 19,
+    "EXCLUDED_WITH_REASON": 82,
+    "BLOCKED": 0
+  },
+  "current_required_blockers": 0,
+  "all_current_required_cells_migrated_or_canonically_mapped": "YES",
+  "scientific_execution_used": "NO"
+}

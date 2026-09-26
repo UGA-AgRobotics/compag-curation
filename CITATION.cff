@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite this software release. See CITATION.md for the associated manuscript status."
+title: "Human-in-the-loop instance dataset curation for sticky-trap pest imagery using segmentation proposals and active learning"
+type: software
+version: 1.9.4rc10
+authors:
+  - family-names: Jahanifar
+    given-names: Hasan
+  - family-names: Mirzakhaninafchi
+    given-names: Hasan
+  - family-names: Porter
+    given-names: Wesley M.
+  - family-names: Kiobia
+    given-names: Denis O.
+  - family-names: Rains
+    given-names: Glen C.
+license: MIT

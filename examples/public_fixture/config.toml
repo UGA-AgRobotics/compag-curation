@@ -1,0 +1,30 @@
+schema = "compag-curation-public-project/v1"
+
+[project]
+name = "public-synthetic-example"
+
+[paths]
+images = "data/images"
+inference_images = "data/inference_images"
+annotations = "annotations/points.xml"
+asset_root = "assets"
+
+[execution]
+profile = "public-safe-balanced-v1"
+device = "cpu"
+seed = 42
+tile_size = 512
+tile_overlap = 64
+points_per_side = 8
+points_per_batch = 16
+pred_iou_threshold = 0.0
+stability_threshold = 0.0
+max_proposals_per_tile = 24
+min_mask_area = 16
+
+[assets]
+checkpoint = "assets/sam2.1_hiera_tiny.pt"
+checkpoint_sha256 = "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69"
+sam2_config = "assets/sam2.1_hiera_t.yaml"
+sam2_config_sha256 = "f932eac1c6241e910031b2f000a81cd9f8a8d4896e2277ab5ffb721f378b188d"
+sam2_config_locator = "configs/sam2.1/sam2.1_hiera_t"

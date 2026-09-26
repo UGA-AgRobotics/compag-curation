@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.csv text eol=lf
+*.json text eol=lf
+bundled-assets/*.whl binary
+bundled-assets/*.zip binary

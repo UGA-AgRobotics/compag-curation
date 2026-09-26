@@ -1,0 +1,20 @@
+include *.md *.txt *.cff *.toml
+include install_laptop.py install_r92_gpu.py start_compag.py easy_start_gui.py easy_start_web.py LAPTOP_CANDIDATE.json
+include bundled-assets/*.whl bundled-assets/*.sha256 bundled-assets/*.zip
+include CAPABILITY_STATUS.json PUBLIC_SOURCE_ALLOWLIST.json PUBLIC_PACKAGING_REVISION.json PUBLIC_TEST_INVENTORY.json PUBLIC_PHOTO_MANIFEST.json
+include CONTRACT_FIX_SOURCE_TO_DERIVATIVE_MAP.json
+include .editorconfig .gitattributes .gitignore
+recursive-include .github *.yml *.yaml *.md
+recursive-include configs *.csv *.json *.toml *.yaml *.yml
+recursive-include docs *.md *.mmd
+recursive-include ASSET_LICENSES *.md
+recursive-include examples *.md *.json *.toml *.yaml *.yml *.csv *.xml *.ppm
+recursive-include requirements *.txt *.md *.json
+recursive-include schemas *.json
+recursive-include manifests *.csv *.json
+recursive-include src/compag_curation/resources *.json *.md *.txt
+recursive-include tests *.py
+recursive-include historical_tests *.py
+recursive-include tools *.py
+global-exclude __pycache__ *.py[cod] .pytest_cache .ruff_cache
+graft paper_reproduction

@@ -1,0 +1,640 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:compag-curation:domain-config:v2",
+  "title": "COMPAG curation domain configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "execution", "notifications", "workflows"],
+  "properties": {
+    "schema": {"const": "compag-curation-domain-config/v2"},
+    "fixture_classification": {"const": "SYNTHETIC_NON_SCIENTIFIC_TEST_FIXTURE"},
+    "execution": {"$ref": "#/$defs/execution"},
+    "notifications": {"$ref": "#/$defs/notifications"},
+    "workflows": {"$ref": "#/$defs/workflows"}
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": ["fixture_classification"],
+        "properties": {
+          "fixture_classification": {"const": "SYNTHETIC_NON_SCIENTIFIC_TEST_FIXTURE"}
+        }
+      },
+      "then": {
+        "properties": {
+          "execution": {
+            "properties": {
+              "authorized": {"const": false},
+              "allow_download": {"const": false}
+            }
+          },
+          "notifications": {
+            "properties": {"enabled": {"const": false}}
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "workflows": {"$ref": "#/$defs/productionHashes"}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "authorized": {"type": "boolean", "default": false},
+        "allow_download": {"type": "boolean", "default": false},
+        "output_collision": {"const": "fail", "default": "fail"},
+        "interpreter": {"type": "string", "minLength": 1, "pattern": "\\S"}
+      }
+    },
+    "notifications": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {"type": "boolean", "default": false},
+        "topic": true,
+        "endpoint": true
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": ["enabled"],
+            "properties": {"enabled": {"const": true}}
+          },
+          "then": {
+            "required": ["topic", "endpoint"],
+            "properties": {
+              "topic": {"type": "string", "minLength": 1, "pattern": "\\S", "not": {"pattern": "\\$"}},
+              "endpoint": {"type": "string", "minLength": 1, "pattern": "\\S", "not": {"pattern": "\\$"}}
+            }
+          }
+        }
+      ]
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1, "pattern": "\\S"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "role": {"type": "string", "minLength": 1, "pattern": "\\S"},
+        "kind": {"enum": ["file", "directory"]},
+        "required": {"type": "boolean"}
+      }
+    },
+    "inputArtifact": {
+      "allOf": [
+        {"$ref": "#/$defs/artifact"},
+        {"properties": {"required": {"const": true}}}
+      ]
+    },
+    "outputArtifact": {
+      "allOf": [
+        {"$ref": "#/$defs/artifact"},
+        {"not": {"required": ["sha256"]}},
+        {"properties": {"required": {"const": false}}}
+      ]
+    },
+    "fileInputArtifact": {
+      "allOf": [
+        {"$ref": "#/$defs/inputArtifact"},
+        {"properties": {"kind": {"const": "file"}}}
+      ]
+    },
+    "directoryInputArtifact": {
+      "allOf": [
+        {"$ref": "#/$defs/inputArtifact"},
+        {"required": ["kind"], "properties": {"kind": {"const": "directory"}}}
+      ]
+    },
+    "fileOutputArtifact": {
+      "allOf": [
+        {"$ref": "#/$defs/outputArtifact"},
+        {"properties": {"kind": {"const": "file"}}}
+      ]
+    },
+    "directoryOutputArtifact": {
+      "allOf": [
+        {"$ref": "#/$defs/outputArtifact"},
+        {"required": ["kind"], "properties": {"kind": {"const": "directory"}}}
+      ]
+    },
+    "shaArtifact": {
+      "type": "object",
+      "required": ["sha256"]
+    },
+    "propose": {
+      "oneOf": [
+        {"$ref": "#/$defs/proposeSam2"},
+        {"$ref": "#/$defs/proposeYoloDataset"}
+      ]
+    },
+    "proposeSam2": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "images", "output", "sam2_package_root", "sam2_checkpoint", "sam2_config", "device"],
+      "properties": {
+        "variant": {"const": "sam2-proposals"},
+        "images": {"$ref": "#/$defs/directoryInputArtifact"},
+        "output": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "sam2_package_root": {"$ref": "#/$defs/directoryInputArtifact"},
+        "sam2_checkpoint": {"$ref": "#/$defs/fileInputArtifact"},
+        "sam2_config": {"$ref": "#/$defs/fileInputArtifact"},
+        "device": {"enum": ["cpu", "cuda"]},
+        "feature_mode": {"enum": ["balanced", "rich", "ultra"]},
+        "sam2_policy": {"enum": ["both", "auto", "prompt"]},
+        "save_all_outputs": {"type": "boolean"}
+      }
+    },
+    "proposeYoloDataset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "coco_annotations", "tiles", "split_manifest", "yolo_dataset_output"],
+      "properties": {
+        "variant": {"const": "yolo-dataset-preparation"},
+        "coco_annotations": {"$ref": "#/$defs/fileInputArtifact"},
+        "tiles": {"$ref": "#/$defs/directoryInputArtifact"},
+        "split_manifest": {"$ref": "#/$defs/fileInputArtifact"},
+        "yolo_dataset_output": {"$ref": "#/$defs/directoryOutputArtifact"}
+      }
+    },
+    "extract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "image_name", "mode", "device", "original_coco", "coco_annotations", "detections", "review_labels", "tiles", "sam2_checkpoint", "model_root", "previous_split_manifest", "merged_original_coco", "merged_tiled_coco", "round_new_ids", "split_manifest", "prototype", "pca", "used_ids", "positive_embeddings", "all_embeddings", "pack", "output"],
+      "properties": {
+        "variant": {"const": "coco-features"},
+        "image_name": {"type": "string", "pattern": "^IMG_[0-9]+$"},
+        "mode": {"enum": ["gate", "xgb", "xgb_recall"]},
+        "device": {"const": "cpu"},
+        "requested_model_name": {"type": "string", "pattern": "^[^/\\\\]+\\.pkl$", "default": "cj_ultra_tilesafe_xgb_r17_hybrid.pkl"},
+        "original_coco": {"$ref": "#/$defs/fileInputArtifact"},
+        "coco_annotations": {"$ref": "#/$defs/fileInputArtifact"},
+        "detections": {"$ref": "#/$defs/fileInputArtifact"},
+        "review_labels": {"$ref": "#/$defs/fileInputArtifact"},
+        "tiles": {"$ref": "#/$defs/directoryInputArtifact"},
+        "sam2_checkpoint": {"$ref": "#/$defs/fileInputArtifact"},
+        "model_root": {"$ref": "#/$defs/directoryInputArtifact"},
+        "previous_split_manifest": {"$ref": "#/$defs/fileInputArtifact"},
+        "merged_original_coco": {"$ref": "#/$defs/fileOutputArtifact"},
+        "merged_tiled_coco": {"$ref": "#/$defs/fileOutputArtifact"},
+        "round_new_ids": {"$ref": "#/$defs/fileOutputArtifact"},
+        "split_manifest": {"$ref": "#/$defs/fileOutputArtifact"},
+        "prototype": {"$ref": "#/$defs/fileOutputArtifact"},
+        "pca": {"$ref": "#/$defs/fileOutputArtifact"},
+        "used_ids": {"$ref": "#/$defs/fileOutputArtifact"},
+        "positive_embeddings": {"$ref": "#/$defs/fileOutputArtifact"},
+        "all_embeddings": {"$ref": "#/$defs/fileOutputArtifact"},
+        "pack": {"$ref": "#/$defs/fileOutputArtifact"},
+        "output": {"$ref": "#/$defs/fileOutputArtifact"},
+        "decision_threshold": {"const": 0.5}
+      }
+    },
+    "review": {
+      "oneOf": [
+        {"$ref": "#/$defs/reviewAl"},
+        {"$ref": "#/$defs/reviewFullImage"}
+      ]
+    },
+    "reviewAl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "image_root", "current_image", "review_mode", "detections", "images", "review_output"],
+      "properties": {
+        "variant": {"const": "al-review-ui"},
+        "image_root": {"$ref": "#/$defs/directoryInputArtifact"},
+        "current_image": {"type": "string", "pattern": "^IMG_[0-9]+$"},
+        "review_mode": {"enum": ["gate", "xgb", "xgb_recall"]},
+        "detections": {"$ref": "#/$defs/fileInputArtifact"},
+        "images": {"$ref": "#/$defs/directoryInputArtifact"},
+        "review_output": {"$ref": "#/$defs/fileOutputArtifact"},
+        "host": {"enum": ["127.0.0.1", "localhost"]},
+        "port": {"type": "integer", "minimum": 1, "maximum": 65535}
+      }
+    },
+    "reviewFullImage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "image_root", "current_image", "review_mode", "detections", "images", "review_output"],
+      "properties": {
+        "variant": {"const": "full-image-review-ui"},
+        "image_root": {"$ref": "#/$defs/directoryInputArtifact"},
+        "current_image": {"type": "string", "pattern": "^IMG_[0-9]+$"},
+        "review_mode": {"enum": ["gate", "xgb", "xgb_recall"]},
+        "detections": {"$ref": "#/$defs/fileInputArtifact"},
+        "images": {"$ref": "#/$defs/directoryInputArtifact"},
+        "review_output": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "host": {"enum": ["127.0.0.1", "localhost"]},
+        "port": {"type": "integer", "minimum": 1, "maximum": 65535}
+      }
+    },
+    "train": {
+      "oneOf": [
+        {"$ref": "#/$defs/trainCocoXgb"},
+        {"$ref": "#/$defs/trainXgb"},
+        {"$ref": "#/$defs/trainXgbMain"},
+        {"$ref": "#/$defs/trainYolo"}
+      ]
+    },
+    "trainCocoXgb": {"$ref": "#/$defs/trainXgbShapeCoco"},
+    "trainXgb": {"$ref": "#/$defs/trainXgbShapeHistorical"},
+    "trainXgbMain": {"$ref": "#/$defs/trainXgbShapeMain"},
+    "trainXgbShapeCoco": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "feature_table", "split_manifest", "previous_tile_predictions", "previous_threshold", "model_output"],
+      "properties": {
+        "variant": {"const": "coco-xgb"},
+        "feature_table": {"$ref": "#/$defs/fileInputArtifact"},
+        "split_manifest": {"$ref": "#/$defs/fileInputArtifact"},
+        "previous_tile_predictions": {"$ref": "#/$defs/fileInputArtifact"},
+        "previous_threshold": {"$ref": "#/$defs/fileInputArtifact"},
+        "previous_best_parameters": {"$ref": "#/$defs/fileInputArtifact"},
+        "model_output": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "seed": {"const": 42, "default": 42},
+        "device": {"const": "cpu", "default": "cpu"},
+        "thread_count": {"const": 1, "default": 1},
+        "decision_threshold": {"const": 0.5}
+      }
+    },
+    "trainXgbShapeHistorical": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "feature_table", "split_manifest", "model_output"],
+      "properties": {
+        "variant": {"const": "xgb"},
+        "feature_table": {"$ref": "#/$defs/fileInputArtifact"},
+        "split_manifest": {"$ref": "#/$defs/fileInputArtifact"},
+        "model_output": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "seed": {"const": 42, "default": 42},
+        "device": {"const": "cpu", "default": "cpu"},
+        "thread_count": {"const": 1, "default": 1},
+        "decision_threshold": {"const": 0.5}
+      }
+    },
+    "trainXgbShapeMain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "feature_table", "split_manifest", "hybrid_previous_tile_predictions", "hybrid_previous_threshold", "augmented_previous_tile_predictions", "augmented_previous_threshold", "model_output"],
+      "properties": {
+        "variant": {"const": "xgb-main"},
+        "feature_table": {"$ref": "#/$defs/fileInputArtifact"},
+        "split_manifest": {"$ref": "#/$defs/fileInputArtifact"},
+        "hybrid_previous_tile_predictions": {"$ref": "#/$defs/fileInputArtifact"},
+        "hybrid_previous_threshold": {"$ref": "#/$defs/fileInputArtifact"},
+        "augmented_previous_tile_predictions": {"$ref": "#/$defs/fileInputArtifact"},
+        "augmented_previous_threshold": {"$ref": "#/$defs/fileInputArtifact"},
+        "model_output": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "seed": {"const": 42, "default": 42},
+        "device": {"const": "cpu", "default": "cpu"},
+        "thread_count": {"const": 1, "default": 1},
+        "decision_threshold": {"const": 0.5}
+      }
+    },
+    "trainYolo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "data_yaml", "dataset_root", "local_initial_weights", "model_output"],
+      "properties": {
+        "variant": {"const": "yolo"},
+        "data_yaml": {"$ref": "#/$defs/fileInputArtifact"},
+        "dataset_root": {"$ref": "#/$defs/directoryInputArtifact"},
+        "local_initial_weights": {"$ref": "#/$defs/fileInputArtifact"},
+        "model_output": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "imgsz": {"type": "integer", "minimum": 1, "default": 512},
+        "epochs": {"type": "integer", "minimum": 1, "default": 60},
+        "batch": {"type": "integer", "minimum": 1, "default": 16},
+        "patience": {"type": "integer", "minimum": 0, "default": 20},
+        "lr0": {"type": "number", "exclusiveMinimum": 0, "default": 0.001},
+        "weight_decay": {"type": "number", "minimum": 0, "default": 0.0005},
+        "close_mosaic": {"type": "integer", "minimum": 0, "default": 10},
+        "seed": {"const": 0, "default": 0},
+        "deterministic": {"const": true, "default": true},
+        "device": {"const": "cpu", "default": "cpu"}
+      }
+    },
+    "infer": {
+      "oneOf": [
+        {"$ref": "#/$defs/inferSam2Xgb"},
+        {"$ref": "#/$defs/inferSam2XgbYolo"}
+      ]
+    },
+    "inferSam2Xgb": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "images", "output", "sam2_package_root", "sam2_checkpoint", "sam2_config", "prototype", "padded_prototype", "pca", "xgb_model", "embed_backbone", "embed_backbone_weights", "device"],
+      "properties": {
+        "variant": {"const": "sam2-xgb"},
+        "images": {"$ref": "#/$defs/directoryInputArtifact"},
+        "output": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "sam2_package_root": {"$ref": "#/$defs/directoryInputArtifact"},
+        "sam2_checkpoint": {"$ref": "#/$defs/fileInputArtifact"},
+        "sam2_config": {"$ref": "#/$defs/fileInputArtifact"},
+        "prototype": {"$ref": "#/$defs/fileInputArtifact"},
+        "padded_prototype": {"$ref": "#/$defs/fileInputArtifact"},
+        "pca": {"$ref": "#/$defs/fileInputArtifact"},
+        "xgb_model": {"$ref": "#/$defs/fileInputArtifact"},
+        "embed_backbone": {"enum": ["resnet18", "resnet34", "resnet50", "resnet101"]},
+        "embed_backbone_weights": {"$ref": "#/$defs/fileInputArtifact"},
+        "device": {"enum": ["cpu", "cuda"]},
+        "decision_threshold": {"const": 0.5},
+        "mode": {"enum": ["gate", "xgb", "xgb_recall"], "default": "xgb_recall"},
+        "save_all": {"type": "boolean", "default": true},
+        "sam2_policy": {"enum": ["both", "auto", "prompt"], "default": "both"},
+        "yolo_confidence": {"type": "number", "minimum": 0, "maximum": 1, "default": 0.20},
+        "yolo_iou": {"type": "number", "minimum": 0, "maximum": 1, "default": 0.60},
+        "detector_policy": {"enum": ["and", "or", "xgb", "yolo", "hybrid"], "default": "hybrid"},
+        "detector_missing": {"enum": ["reject", "ignore"], "default": "ignore"},
+        "detector_threshold": {"type": "number", "minimum": 0, "maximum": 1, "default": 0.5},
+        "hybrid_yolo_bias": {"type": "number", "minimum": 0, "maximum": 1, "default": 0.8}
+      }
+    },
+    "inferSam2XgbYolo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "images", "output", "sam2_package_root", "sam2_checkpoint", "sam2_config", "prototype", "padded_prototype", "pca", "xgb_model", "yolo_weights", "embed_backbone", "embed_backbone_weights", "device"],
+      "properties": {
+        "variant": {"const": "sam2-xgb-yolo"},
+        "images": {"$ref": "#/$defs/directoryInputArtifact"},
+        "output": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "sam2_package_root": {"$ref": "#/$defs/directoryInputArtifact"},
+        "sam2_checkpoint": {"$ref": "#/$defs/fileInputArtifact"},
+        "sam2_config": {"$ref": "#/$defs/fileInputArtifact"},
+        "prototype": {"$ref": "#/$defs/fileInputArtifact"},
+        "padded_prototype": {"$ref": "#/$defs/fileInputArtifact"},
+        "pca": {"$ref": "#/$defs/fileInputArtifact"},
+        "xgb_model": {"$ref": "#/$defs/fileInputArtifact"},
+        "yolo_weights": {"$ref": "#/$defs/fileInputArtifact"},
+        "embed_backbone": {"enum": ["resnet18", "resnet34", "resnet50", "resnet101"]},
+        "embed_backbone_weights": {"$ref": "#/$defs/fileInputArtifact"},
+        "device": {"enum": ["cpu", "cuda"]},
+        "decision_threshold": {"const": 0.5},
+        "mode": {"enum": ["gate", "xgb", "xgb_recall"], "default": "xgb_recall"},
+        "save_all": {"type": "boolean", "default": true},
+        "sam2_policy": {"enum": ["both", "auto", "prompt"], "default": "both"},
+        "yolo_confidence": {"type": "number", "minimum": 0, "maximum": 1, "default": 0.20},
+        "yolo_iou": {"type": "number", "minimum": 0, "maximum": 1, "default": 0.60},
+        "detector_policy": {"enum": ["and", "or", "xgb", "yolo", "hybrid"], "default": "hybrid"},
+        "detector_missing": {"enum": ["reject", "ignore"], "default": "reject"},
+        "detector_threshold": {"type": "number", "minimum": 0, "maximum": 1, "default": 0.5},
+        "hybrid_yolo_bias": {"type": "number", "minimum": 0, "maximum": 1, "default": 0.8}
+      }
+    },
+    "evaluate": {
+      "oneOf": [
+        {"$ref": "#/$defs/evaluateCoverageBasic"},
+        {"$ref": "#/$defs/evaluateCoveragePointsOverlay"},
+        {"$ref": "#/$defs/evaluateCoveragePredictionsOverlay"},
+        {"$ref": "#/$defs/evaluateCoverageReviewability"},
+        {"$ref": "#/$defs/evaluateMetaAnalysis"},
+        {"$ref": "#/$defs/evaluateBorderTiny"}
+      ]
+    },
+    "evaluateCoverageBasic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "predictions", "annotations", "evaluator_script", "tile_index", "output"],
+      "properties": {
+        "variant": {"const": "coverage-basic"},
+        "predictions": {"$ref": "#/$defs/fileInputArtifact"},
+        "annotations": {"$ref": "#/$defs/fileInputArtifact"},
+        "evaluator_script": {"$ref": "#/$defs/fileInputArtifact"},
+        "tile_index": {"$ref": "#/$defs/fileInputArtifact"},
+        "output": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "decision_threshold": {"const": 0.5}
+      }
+    },
+    "evaluateCoveragePointsOverlay": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "predictions", "annotations", "images", "evaluator_script", "tile_index", "output"],
+      "properties": {
+        "variant": {"const": "coverage-points-overlay"},
+        "predictions": {"$ref": "#/$defs/fileInputArtifact"},
+        "annotations": {"$ref": "#/$defs/fileInputArtifact"},
+        "images": {"$ref": "#/$defs/directoryInputArtifact"},
+        "evaluator_script": {"$ref": "#/$defs/fileInputArtifact"},
+        "tile_index": {"$ref": "#/$defs/fileInputArtifact"},
+        "output": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "decision_threshold": {"const": 0.5}
+      }
+    },
+    "evaluateCoveragePredictionsOverlay": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "predictions", "annotations", "images", "evaluator_script", "tile_index", "output"],
+      "properties": {
+        "variant": {"const": "coverage-predictions-overlay"},
+        "predictions": {"$ref": "#/$defs/fileInputArtifact"},
+        "annotations": {"$ref": "#/$defs/fileInputArtifact"},
+        "images": {"$ref": "#/$defs/directoryInputArtifact"},
+        "evaluator_script": {"$ref": "#/$defs/fileInputArtifact"},
+        "tile_index": {"$ref": "#/$defs/fileInputArtifact"},
+        "output": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "decision_threshold": {"const": 0.5}
+      }
+    },
+    "evaluateCoverageReviewability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "predictions", "annotations", "images", "review_labels", "evaluator_script", "tile_index", "output"],
+      "properties": {
+        "variant": {"const": "coverage-reviewability"},
+        "predictions": {"$ref": "#/$defs/fileInputArtifact"},
+        "annotations": {"$ref": "#/$defs/fileInputArtifact"},
+        "images": {"$ref": "#/$defs/directoryInputArtifact"},
+        "review_labels": {"$ref": "#/$defs/fileInputArtifact"},
+        "evaluator_script": {"$ref": "#/$defs/fileInputArtifact"},
+        "tile_index": {"$ref": "#/$defs/fileInputArtifact"},
+        "output": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "decision_threshold": {"const": 0.5}
+      }
+    },
+    "evaluateMetaAnalysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "review_root", "output"],
+      "properties": {
+        "variant": {"const": "meta-analysis"},
+        "review_root": {"$ref": "#/$defs/directoryInputArtifact"},
+        "output": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "decision_threshold": {"const": 0.5}
+      }
+    },
+    "evaluateBorderTiny": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "predictions", "annotations", "output"],
+      "properties": {
+        "variant": {"const": "border-tiny"},
+        "predictions": {"$ref": "#/$defs/fileInputArtifact"},
+        "annotations": {"$ref": "#/$defs/fileInputArtifact"},
+        "output": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "decision_threshold": {"const": 0.5}
+      }
+    },
+    "transfer": {
+      "oneOf": [
+        {"$ref": "#/$defs/transferResultTree"},
+        {"$ref": "#/$defs/transferCsvText"}
+      ]
+    },
+    "transferResultTree": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "source", "destination"],
+      "properties": {
+        "variant": {"const": "result-tree"},
+        "source": {"$ref": "#/$defs/directoryInputArtifact"},
+        "destination": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "expected_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "include_patterns": {"const": ["*.*"]}
+      }
+    },
+    "transferCsvText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "source", "destination", "probe_workspace"],
+      "properties": {
+        "variant": {"const": "csv-and-text-probe"},
+        "source": {"$ref": "#/$defs/directoryInputArtifact"},
+        "destination": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "probe_workspace": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "expected_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "include_patterns": {"const": ["*.csv", "*.txt"]}
+      }
+    },
+    "report": {
+      "oneOf": [
+        {"$ref": "#/$defs/reportDatasetSummary"},
+        {"$ref": "#/$defs/reportPlots"}
+      ]
+    },
+    "reportDatasetSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "source_tables", "output"],
+      "properties": {
+        "variant": {"const": "dataset-summary"},
+        "source_tables": {"$ref": "#/$defs/directoryInputArtifact"},
+        "output": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "decision_threshold": {"const": 0.5}
+      }
+    },
+    "reportPlots": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant", "source_tables", "output"],
+      "properties": {
+        "variant": {"const": "plots"},
+        "source_tables": {"$ref": "#/$defs/directoryInputArtifact"},
+        "output": {"$ref": "#/$defs/directoryOutputArtifact"},
+        "decision_threshold": {"const": 0.5}
+      }
+    },
+    "workflows": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["propose", "extract-features", "review", "train", "infer", "evaluate", "transfer", "report"],
+      "properties": {
+        "propose": {"$ref": "#/$defs/propose"},
+        "extract-features": {"$ref": "#/$defs/extract"},
+        "review": {"$ref": "#/$defs/review"},
+        "train": {"$ref": "#/$defs/train"},
+        "infer": {"$ref": "#/$defs/infer"},
+        "evaluate": {"$ref": "#/$defs/evaluate"},
+        "transfer": {"$ref": "#/$defs/transfer"},
+        "report": {"$ref": "#/$defs/report"}
+      }
+    },
+    "productionHashes": {
+      "type": "object",
+      "properties": {
+        "propose": {
+          "properties": {
+            "images": {"$ref": "#/$defs/shaArtifact"},
+            "sam2_package_root": {"$ref": "#/$defs/shaArtifact"},
+            "sam2_checkpoint": {"$ref": "#/$defs/shaArtifact"},
+            "sam2_config": {"$ref": "#/$defs/shaArtifact"},
+            "coco_annotations": {"$ref": "#/$defs/shaArtifact"},
+            "tiles": {"$ref": "#/$defs/shaArtifact"},
+            "split_manifest": {"$ref": "#/$defs/shaArtifact"}
+          }
+        },
+        "extract-features": {
+          "properties": {
+            "original_coco": {"$ref": "#/$defs/shaArtifact"},
+            "coco_annotations": {"$ref": "#/$defs/shaArtifact"},
+            "detections": {"$ref": "#/$defs/shaArtifact"},
+            "review_labels": {"$ref": "#/$defs/shaArtifact"},
+            "tiles": {"$ref": "#/$defs/shaArtifact"},
+            "sam2_checkpoint": {"$ref": "#/$defs/shaArtifact"},
+            "model_root": {"$ref": "#/$defs/shaArtifact"},
+            "previous_split_manifest": {"$ref": "#/$defs/shaArtifact"}
+          }
+        },
+        "review": {
+          "properties": {
+            "image_root": {"$ref": "#/$defs/shaArtifact"},
+            "detections": {"$ref": "#/$defs/shaArtifact"},
+            "images": {"$ref": "#/$defs/shaArtifact"}
+          }
+        },
+        "train": {
+          "properties": {
+            "feature_table": {"$ref": "#/$defs/shaArtifact"},
+            "split_manifest": {"$ref": "#/$defs/shaArtifact"},
+            "previous_tile_predictions": {"$ref": "#/$defs/shaArtifact"},
+            "previous_threshold": {"$ref": "#/$defs/shaArtifact"},
+            "previous_best_parameters": {"$ref": "#/$defs/shaArtifact"},
+            "hybrid_previous_tile_predictions": {"$ref": "#/$defs/shaArtifact"},
+            "hybrid_previous_threshold": {"$ref": "#/$defs/shaArtifact"},
+            "augmented_previous_tile_predictions": {"$ref": "#/$defs/shaArtifact"},
+            "augmented_previous_threshold": {"$ref": "#/$defs/shaArtifact"},
+            "data_yaml": {"$ref": "#/$defs/shaArtifact"},
+            "dataset_root": {"$ref": "#/$defs/shaArtifact"},
+            "local_initial_weights": {"$ref": "#/$defs/shaArtifact"}
+          }
+        },
+        "infer": {
+          "properties": {
+            "images": {"$ref": "#/$defs/shaArtifact"},
+            "sam2_package_root": {"$ref": "#/$defs/shaArtifact"},
+            "sam2_checkpoint": {"$ref": "#/$defs/shaArtifact"},
+            "sam2_config": {"$ref": "#/$defs/shaArtifact"},
+            "prototype": {"$ref": "#/$defs/shaArtifact"},
+            "padded_prototype": {"$ref": "#/$defs/shaArtifact"},
+            "pca": {"$ref": "#/$defs/shaArtifact"},
+            "xgb_model": {"$ref": "#/$defs/shaArtifact"},
+            "yolo_weights": {"$ref": "#/$defs/shaArtifact"},
+            "embed_backbone_weights": {"$ref": "#/$defs/shaArtifact"}
+          }
+        },
+        "evaluate": {
+          "properties": {
+            "predictions": {"$ref": "#/$defs/shaArtifact"},
+            "annotations": {"$ref": "#/$defs/shaArtifact"},
+            "images": {"$ref": "#/$defs/shaArtifact"},
+            "review_labels": {"$ref": "#/$defs/shaArtifact"},
+            "review_root": {"$ref": "#/$defs/shaArtifact"},
+            "evaluator_script": {"$ref": "#/$defs/shaArtifact"},
+            "tile_index": {"$ref": "#/$defs/shaArtifact"}
+          }
+        },
+        "transfer": {
+          "properties": {"source": {"$ref": "#/$defs/shaArtifact"}}
+        },
+        "report": {
+          "properties": {
+            "source_tables": {"$ref": "#/$defs/shaArtifact"}
+          }
+        }
+      }
+    }
+  }
+}

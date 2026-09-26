@@ -1,0 +1,2 @@
+# Official SAM2 source for v1.9.3 shared Lite/Full/Full-image science-gpu. Install separately with SAM2_BUILD_CUDA=1, --no-build-isolation, and --no-deps.
+sam-2 @ git+https://github.com/facebookresearch/sam2.git@2b90b9f5ceec907a1c18123530e92e794ad901a4

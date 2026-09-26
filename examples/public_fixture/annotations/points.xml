@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<annotations>
+  <image id="0" name="synthetic-heldout__card.ppm" width="64" height="64">
+    <points label="cj" points="17,23"/>
+    <points label="cj" points="45,44"/>
+  </image>
+</annotations>

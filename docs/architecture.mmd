@@ -1,0 +1,12 @@
+flowchart LR
+    I[Compatible sticky-card images] --> P[Inspect and validate]
+    P --> T[Prepare 512 px tiles]
+    T --> S[SAM2 proposals]
+    S --> F[Profile-bound feature extraction]
+    F --> R[Review export]
+    R --> H[Human labels]
+    H --> G[Group-pure split]
+    G --> X[Fail-closed CUDA XGBoost training]
+    X --> B[Verified portable bundle]
+    B --> N[Fresh-image inference]
+    N --> E[Evaluation and report]

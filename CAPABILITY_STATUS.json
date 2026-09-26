@@ -1,0 +1,243 @@
+{
+  "schema": "compag-r92-rc6-capability-status/v1",
+  "candidate_version": "1.9.4rc6",
+  "date": "2026-09-24",
+  "human_review_completed": false,
+  "independent_scientific_validation": false,
+  "capabilities": [
+    {
+      "capability": "full_card_preparation_and_coverage",
+      "implemented": true,
+      "test_type": "real full image",
+      "actual_execution_status": "PASS_48_AND_40_TILES",
+      "artifact_identity": "native r92 SHA256 fffef7a85192b99dcca3bcc5750215150d2ca9659121363198041244bbfe57c1",
+      "evidence_location": "prepared_first_card/PROJECT_RECEIPT.json; prepared_second_card/PROJECT_RECEIPT.json",
+      "remaining_blocker": null
+    },
+    {
+      "capability": "native_r92_initial_inference",
+      "implemented": true,
+      "test_type": "real full image and rc4 score parity",
+      "actual_execution_status": "PASS_48_TILES_1562_CANDIDATES",
+      "artifact_identity": "native r92 classifier SHA256 ebcd0761bd4d8b5db466e2724c6c15882286fdc28ab29633c9f4c49350375bc4",
+      "evidence_location": "first_card_inference/FULL_INFERENCE_RECEIPT.json",
+      "remaining_blocker": null
+    },
+    {
+      "capability": "selected_review_save_resume",
+      "implemented": true,
+      "test_type": "real review state and scripted event fixture",
+      "actual_execution_status": "HISTORICAL_RC5_RESTRICTED_SESSION_EXPANDED_IN_RC6",
+      "artifact_identity": "first selection SHA256 6cbe3e6b9b7926757fbac98ccfb07bad9a3688742377bed1780ef9df896435cd",
+      "evidence_location": "first_card_review_pending/R92_REVIEW_STATE.json; first_card_review_test_fixture/R92_REVIEW_STATE.json",
+      "remaining_blocker": "origin of old event rows is not attested as genuine human review"
+    },
+    {
+      "capability": "human_review_finalization",
+      "implemented": true,
+      "test_type": "incomplete-review negative test",
+      "actual_execution_status": "READY_PENDING_GENUINE_AUTHOR_REVIEW",
+      "artifact_identity": "rc6 full-pool reviewed scope; 1562 scored candidates on first diagnostic card",
+      "evidence_location": "first_card_review_pending/",
+      "remaining_blocker": "user must make and explicitly commit genuine decisions; software-test labels are separate"
+    },
+    {
+      "capability": "cumulative_snapshot_and_duplicate_accounting",
+      "implemented": true,
+      "test_type": "software-test labels on real diagnostic card",
+      "actual_execution_status": "PASS_48_ELIGIBLE_2_SKIPPED_48_REPEAT_GUARDED",
+      "artifact_identity": "snapshot SHA256 5a32124badf5a80345c0fd8f5eeab2d12c23f03763f42011468752ecf2bf54d7",
+      "evidence_location": "software_test_r1/training_snapshot.json; repeated_snapshot.json",
+      "remaining_blocker": "real human snapshot awaits decisions"
+    },
+    {
+      "capability": "fresh_project_xgb_fit_and_reload",
+      "implemented": true,
+      "test_type": "actual numerical fit on software-test labels",
+      "actual_execution_status": "PASS_30_BOOSTING_ROUNDS",
+      "artifact_identity": "classifier SHA256 462914dd339a9744f9a217424dd87bd5dc905731e9c93295be55cfebba0ae01b",
+      "evidence_location": "software_test_r1/xgb_model/PROJECT_MODEL_MANIFEST.json",
+      "remaining_blocker": "scientific performance and human-owned fit not evaluated"
+    },
+    {
+      "capability": "original_coordinate_full_mask_export",
+      "implemented": true,
+      "test_type": "real diagnostic card software-test export",
+      "actual_execution_status": "PASS_48_SELECTED_MASKS",
+      "artifact_identity": "source project receipt and proposal hashes in snapshot",
+      "evidence_location": "software_test_r1/selected_original_coco.json",
+      "remaining_blocker": "reviewed proposal masks are not exhaustive target-complete image annotation"
+    },
+    {
+      "capability": "next_full_card_xgb_only",
+      "implemented": true,
+      "test_type": "installed-wheel real full image",
+      "actual_execution_status": "PASS_40_TILES_1027_CANDIDATES",
+      "artifact_identity": "XGB manifest SHA256 f7ab70a84896ee3fdffc9767895bc87259ef67cd6ffe184a5000e7b4fbc2aee8",
+      "evidence_location": "second_card_off_inference/FULL_INFERENCE_RECEIPT.json; installed_acceptance_final3.json",
+      "remaining_blocker": "uses software-test labels; not biological validation"
+    },
+    {
+      "capability": "next_review_session",
+      "implemented": true,
+      "test_type": "real saved review state",
+      "actual_execution_status": "PASS_PENDING_50_HUMAN_DECISIONS",
+      "artifact_identity": "second selection SHA256 e7929bd6125f2e1b1b9c25f74154cddfb8c8f487ad1412eedd2bb81ff6cda661",
+      "evidence_location": "second_card_review_pending/R92_REVIEW_STATE.json",
+      "remaining_blocker": "user must review next selected candidates"
+    },
+    {
+      "capability": "yolo_complete_tile_qa",
+      "implemented": true,
+      "test_type": "synthetic contract fixture and negative guards",
+      "actual_execution_status": "PASS_SYNTHETIC_4_TILES_2_POSITIVE_2_EMPTY",
+      "artifact_identity": "dataset manifest SHA256 fa4f958b576ae6f17d0385e80a32fe2bb4d5d93c0aeb4803880a0e2c02c89f22",
+      "evidence_location": "yolo_fixture_v2/synthetic_yolo_dataset/DATASET_MANIFEST.json",
+      "remaining_blocker": "real complete CJ tile QA from independent train/val cards not supplied"
+    },
+    {
+      "capability": "optional_yolo_fit_reload_prediction",
+      "implemented": true,
+      "test_type": "real one-epoch CPU optimization on synthetic complete-QA dataset",
+      "actual_execution_status": "PASS_FUNCTIONAL_NO_QUALITY_CLAIM",
+      "artifact_identity": "installed-wheel checkpoint SHA256 e75a05851e8d1c7846031e92754c6c281ebd399e380022d2457e7531800ed0f1; full-fusion checkpoint SHA256 3ed2e07f5df827c548887b970250a598f471d26190f00e41afa7ae10d5b2176f",
+      "evidence_location": "yolo_fixture_v2/synthetic_yolo_fit_final5/YOLO_PROJECT_MODEL.json; yolo_fixture_v2/synthetic_yolo_fit_final3/YOLO_PROJECT_MODEL.json",
+      "remaining_blocker": "real reviewed detector dataset not supplied"
+    },
+    {
+      "capability": "yolo_full_tile_box_precompute",
+      "implemented": true,
+      "test_type": "installed optional-wheel inference on real diagnostic card",
+      "actual_execution_status": "PASS_40_TILES_1720_LOW_THRESHOLD_BOXES",
+      "artifact_identity": "checkpoint SHA256 3ed2e07f5df827c548887b970250a598f471d26190f00e41afa7ae10d5b2176f",
+      "evidence_location": "second_card_yolo_boxes_final3.json",
+      "remaining_blocker": "random-init one-epoch detector has no useful accuracy claim"
+    },
+    {
+      "capability": "yolo_off_isolation",
+      "implemented": true,
+      "test_type": "installed science-GPU environment without Ultralytics",
+      "actual_execution_status": "PASS",
+      "artifact_identity": "OFF model-set SHA256 333e56752a9aef271f99f1c488d18215bb844cbd5e479862e46f292916f5aeed",
+      "evidence_location": "second_card_off_inference/FULL_INFERENCE_RECEIPT.json",
+      "remaining_blocker": null
+    },
+    {
+      "capability": "yolo_prompt_mode",
+      "implemented": true,
+      "test_type": "installed-wheel real SAM2 prompt on one complete prepared test tile",
+      "actual_execution_status": "PASS_1_TILE_43_BOXES_15_PROMPT_MASKS",
+      "artifact_identity": "final3 detector checkpoint SHA256 3ed2e07f5df827c548887b970250a598f471d26190f00e41afa7ae10d5b2176f",
+      "evidence_location": "route_prompt_inference/FULL_INFERENCE_RECEIPT.json; route_prompt_checkpoint/PROGRESS.json",
+      "remaining_blocker": "one-tile software route test; no biological accuracy claim"
+    },
+    {
+      "capability": "yolo_fusion_mode",
+      "implemented": true,
+      "test_type": "installed-wheel full-card run",
+      "actual_execution_status": "PASS_40_TILES_1027_CANDIDATES_49_MATCHES",
+      "artifact_identity": "final3 fusion model set SHA256 31d48ee1135aa42e6707eaa775b36e16725a2849155b772bb30682de46bb7709",
+      "evidence_location": "second_card_fusion_final6_inference/FULL_INFERENCE_RECEIPT.json; installed_acceptance_final6.json; second_card_fusion_inference/FULL_INFERENCE_RECEIPT.json",
+      "remaining_blocker": "random-init one-epoch detector has no useful accuracy claim"
+    },
+    {
+      "capability": "yolo_both_mode",
+      "implemented": true,
+      "test_type": "installed-wheel real SAM2 prompt plus hybrid fusion on one prepared diagnostic tile",
+      "actual_execution_status": "PASS_1_TILE_75_CANDIDATES_15_PROMPT_MASKS_14_MATCHES",
+      "artifact_identity": "final3 detector checkpoint SHA256 3ed2e07f5df827c548887b970250a598f471d26190f00e41afa7ae10d5b2176f",
+      "evidence_location": "route_both_inference/FULL_INFERENCE_RECEIPT.json",
+      "remaining_blocker": "one-tile software route test; no biological accuracy claim"
+    },
+    {
+      "capability": "atomic_activation_and_retained_detector",
+      "implemented": true,
+      "test_type": "positive and negative model-set verification",
+      "actual_execution_status": "PASS_TRAINED_RETAINED_BAD_ROUND_REJECTED",
+      "artifact_identity": "verified final3 checkpoint SHA256 3ed2e07f5df827c548887b970250a598f471d26190f00e41afa7ae10d5b2176f",
+      "evidence_location": "software_test_r1_retained_source_model_set/MODEL_SET.json; failed_activation_evidence.json",
+      "remaining_blocker": null
+    },
+    {
+      "capability": "interrupted_full_inference_resume",
+      "implemented": true,
+      "test_type": "real GPU interruption and resume",
+      "actual_execution_status": "PASS_3_TILES_REUSED_IN_40_TILE_COMPLETION",
+      "artifact_identity": "fusion checkpoint identity binds project/model/assets/YOLO/code",
+      "evidence_location": "second_card_fusion_checkpoint/; second_card_fusion_inference/FULL_INFERENCE_RECEIPT.json",
+      "remaining_blocker": null
+    },
+    {
+      "capability": "invalid_input_and_missing_model_guards",
+      "implemented": true,
+      "test_type": "negative software tests",
+      "actual_execution_status": "PASS",
+      "artifact_identity": "same native and final3 model hashes",
+      "evidence_location": "tampered_first_card_inference/; failed_activation_evidence.json; tests/test_r92_round_continuation.py",
+      "remaining_blocker": null
+    },
+    {
+      "capability": "installed_wheel_acceptance",
+      "implemented": true,
+      "test_type": "noneditable installed-wheel runner and doctor",
+      "actual_execution_status": "HISTORICAL_RC5_PASS_AND_RC6_FRESH_NONEDITABLE_INSTALL_PASS",
+      "artifact_identity": "rc5 wheel SHA256 e4ce7bc84d30f1f1275d1e6f6144a6b3203777a04cd151dac1186ce26254b6ce; original rc6 wheel SHA256 330293b800ada70c2a2c7bf46d3b7639894c3c14e65cb3baeb2d942eb138d796",
+      "evidence_location": "RC6_CHANGE_AND_EVIDENCE_EN.md; GITHUB_RELEASE_READINESS_EN.md (separate audit deliverable)",
+      "remaining_blocker": null
+    },
+    {
+      "capability": "independent_scientific_evaluation",
+      "implemented": false,
+      "test_type": "none",
+      "actual_execution_status": "NOT_CLAIMED",
+      "artifact_identity": null,
+      "evidence_location": "RC5_CHANGE_AND_EVIDENCE_EN.md",
+      "remaining_blocker": "requires genuine human labels and independent evaluation"
+    },
+    {
+      "capability": "remote_publication",
+      "implemented": false,
+      "test_type": "none",
+      "actual_execution_status": "NOT_AUTHORIZED",
+      "artifact_identity": null,
+      "evidence_location": "PUBLIC_RELEASE_SCOPE.md; ASSET_LICENSES/PUBLIC_ASSET_SCOPE_EN.md",
+      "remaining_blocker": "exact asset reuse terms and separate remote deployment authorization/destination; no upload or guest verification yet"
+    },
+    {
+      "capability": "full_scored_pool_review_and_filters",
+      "implemented": true,
+      "test_type": "120-synthetic-candidate unit fixture and real browser on recorded 1562-candidate card",
+      "actual_execution_status": "PASS_SOURCE_AND_BROWSER",
+      "artifact_identity": "rc6 review-state/v2; 1562 pool, 50 recommended, 5 within margin",
+      "evidence_location": "tests/test_r92_full_pool.py; RC6_CHANGE_AND_EVIDENCE_EN.md",
+      "remaining_blocker": null
+    },
+    {
+      "capability": "reviewed_decisions_to_next_xgb_model",
+      "implemented": true,
+      "test_type": "51 explicit software-test actions on bound first-card inference",
+      "actual_execution_status": "PASS_TEST_FIXTURE_ONLY",
+      "artifact_identity": "51 cumulative eligible rows including one outside Top-50; XGB 10 boosting rounds",
+      "evidence_location": "RC6_CHANGE_AND_EVIDENCE_EN.md",
+      "remaining_blocker": "genuine author review and independent validation pending"
+    },
+    {
+      "capability": "restricted_session_expansion",
+      "implemented": true,
+      "test_type": "read-only migration of prior 50-row state to new revision",
+      "actual_execution_status": "PASS_1562_POOL_OLD_BYTES_PRESERVED",
+      "artifact_identity": "source event SHA256 2a861eece0a756c6803e100ffa4b7f91d959b23dec1d856b8f9978d17f427d2e",
+      "evidence_location": "RC6_CHANGE_AND_EVIDENCE_EN.md",
+      "remaining_blocker": null
+    },
+    {
+      "capability": "project_delete_mask_and_bulk_accept_remaining",
+      "implemented": true,
+      "test_type": "120-candidate synthetic regression and bound diagnostic software fixture",
+      "actual_execution_status": "PASS_SOURCE_INSTALLED_WHEEL_BROWSER",
+      "artifact_identity": "69 remaining bulk model predictions; deletion reduced the 51-row test snapshot and COCO to 50",
+      "evidence_location": "tests/test_r92_full_pool.py; RC6_CHANGE_AND_EVIDENCE_EN.md",
+      "remaining_blocker": "genuine user review and independent biological validation pending"
+    }
+  ]
+}

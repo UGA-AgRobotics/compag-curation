@@ -1,0 +1,7 @@
+# Rc9 R4 public release scope
+
+This is a new application version after the rc6 R3 polygon-display repair. The public repository contains code, tests, tools, configurations, documentation, synthetic fixtures, license texts, citation information, and four immutable files under `bundled-assets/`: the matching application wheel and checksum sidecar, the exact native r92 model ZIP (`fffef7a85192b99dcca3bcc5750215150d2ca9659121363198041244bbfe57c1`), and the selected ten-photo ZIP (`344c8d767a1719403a3713e0f51587971f4ab9ea18e1d1a44034ed72c9297914`). A GitHub clone includes all four files; no separate asset download is required. The model and ten-photo archives are byte-identical to rc6 R3; the R3 name on the photo archive records its first packaging. See `PUBLIC_PHOTO_MANIFEST.json`.
+
+The ten original photographs are examples, without labels. They are not a validated accuracy benchmark or proof of a paper ten-card audit. All other research photos, real review logs, masks, annotations, feature/prediction tables and new fitted project models are outside public scope. Public code is MIT; author-controlled documentation, model and ten photographs are CC BY 4.0 as recorded in `ASSET_LICENSES/PUBLIC_ASSET_SCOPE_EN.md`. Third-party licenses remain intact. Rights-holder approvals and actual remote/no-login availability have not been verified.
+
+Historical two-photo reports remain provenance for earlier work, not current ten-photo acceptance evidence.

@@ -1,0 +1,266 @@
+{
+  "active_command": "python3.12 -I -B tools/public_safe_acceptance.py --root . --work-dir ABSENT_DIR --receipt ABSENT_JSON",
+  "classifications": {
+    "ACTIVE_PUBLIC_SAFE_EXECUTED": "Executed in the bounded Python 3.12 lane; zero skips required.",
+    "DEFERRED_SCIENCE_NOT_EXECUTED": "Requires a broader scientific/backend environment; no pass credit in this repair.",
+    "HISTORICAL_OR_OMITTED_HELPER_NOT_EXECUTED": "References an intentionally omitted release helper or superseded packaging lane; no pass credit.",
+    "PUBLIC_NOT_SELECTED_NOT_EXECUTED": "Public or synthetic test code retained, but outside the deliberately small repair acceptance set; no pass credit.",
+    "RESTRICTED_MODEL_OR_ASSET_NOT_EXECUTED": "Exercises model/bundle/restricted-asset surfaces; no execution and no pass credit."
+  },
+  "policy": "This inventory classifies the documented bounded base command only. Only ACTIVE_PUBLIC_SAFE_EXECUTED rows receive pass credit in that command. Separate final-release supplemental regression/provider/replay results are reported in author QA, not inferred from this inventory. Historical tests remain classified without pass credit.",
+  "schema": "compag-rc9-public-test-inventory/v1",
+  "status": "CURRENT_R5_4_BOUNDED_BASE_LANE",
+  "tests": [
+    {
+      "path": "tests/test_canonical_active_learning.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_canonical_active_learning_facade.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_canonical_active_learning_gpu_profile.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_canonical_active_learning_service.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_canonical_backend.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_canonical_evaluation_adapter.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_canonical_gpu_kernels.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_canonical_profile_contract.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_canonical_real_demo_contract.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_canonical_run_project_integration.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_canonical_service.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_canonical_service_gpu_profile.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_canonical_transfer_active_learning.py",
+      "classification": "RESTRICTED_MODEL_OR_ASSET_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_dual_profile_cli.py",
+      "classification": "ACTIVE_PUBLIC_SAFE_EXECUTED",
+      "pass_credit": true
+    },
+    {
+      "path": "tests/test_dual_profile_execution_gates.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_dual_profile_real_demo.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_dual_profile_runtime.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_full_image_backend.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_full_image_features.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_full_image_review_session.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_full_image_scene.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_full_image_service_integration.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_gpu_runtime_profile.py",
+      "classification": "DEFERRED_SCIENCE_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_manifest_contract.py",
+      "classification": "HISTORICAL_OR_OMITTED_HELPER_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_mapped_symbol_contracts.py",
+      "classification": "PUBLIC_NOT_SELECTED_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_model_bundle_dual_profile.py",
+      "classification": "RESTRICTED_MODEL_OR_ASSET_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_model_bundle_gpu_profile.py",
+      "classification": "RESTRICTED_MODEL_OR_ASSET_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_model_bundle_transfer_lineage.py",
+      "classification": "RESTRICTED_MODEL_OR_ASSET_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_model_bundle_v2.py",
+      "classification": "RESTRICTED_MODEL_OR_ASSET_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_only_codes_compat.py",
+      "classification": "PUBLIC_NOT_SELECTED_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_only_codes_v191_fixes.py",
+      "classification": "PUBLIC_NOT_SELECTED_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_post_upload_metadata_finalizer.py",
+      "classification": "PUBLIC_NOT_SELECTED_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_prepare_r92_public_example.py",
+      "classification": "PUBLIC_NOT_SELECTED_NOT_EXECUTED",
+      "pass_credit": false,
+      "note": "Executed separately as focused asset test; excluded from model-free contributor lane."
+    },
+    {
+      "path": "tests/test_public_contract.py",
+      "classification": "ACTIVE_PUBLIC_SAFE_EXECUTED",
+      "scope": "SELECTED_METHODS_ONLY",
+      "selected_tests": [
+        "PublicContractTests.test_public_module_imports_are_inert",
+        "PublicContractTests.test_cli_help_every_subcommand",
+        "PublicContractTests.test_all_variants_validate_and_plan"
+      ],
+      "unselected_tests_pass_credit": false,
+      "pass_credit": true
+    },
+    {
+      "path": "tests/test_public_model_deserialization_security.py",
+      "classification": "RESTRICTED_MODEL_OR_ASSET_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_public_safe_acceptance.py",
+      "classification": "ACTIVE_PUBLIC_SAFE_EXECUTED",
+      "pass_credit": true
+    },
+    {
+      "path": "tests/test_public_zip_builder.py",
+      "classification": "HISTORICAL_OR_OMITTED_HELPER_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_published_model_assisted_session.py",
+      "classification": "RESTRICTED_MODEL_OR_ASSET_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_r92_full_pool.py",
+      "classification": "PUBLIC_NOT_SELECTED_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_r92_mask_geometry.py",
+      "classification": "PUBLIC_NOT_SELECTED_NOT_EXECUTED",
+      "pass_credit": false,
+      "note": "Executed separately as the focused polygon fallback regression."
+    },
+    {
+      "path": "tests/test_r92_round_continuation.py",
+      "classification": "PUBLIC_NOT_SELECTED_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_review_ui.py",
+      "classification": "PUBLIC_NOT_SELECTED_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_round_review_ui.py",
+      "classification": "PUBLIC_NOT_SELECTED_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_runnable_facade_contract.py",
+      "classification": "PUBLIC_NOT_SELECTED_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_runtime_implementation_identity.py",
+      "classification": "PUBLIC_NOT_SELECTED_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "tests/test_transfer_baseline.py",
+      "classification": "RESTRICTED_MODEL_OR_ASSET_NOT_EXECUTED",
+      "pass_credit": false
+    }
+  ],
+  "historical_tests": [
+    {
+      "path": "historical_tests/legacy_test_gpu_profile_installer.py",
+      "classification": "HISTORICAL_OR_OMITTED_HELPER_NOT_EXECUTED",
+      "pass_credit": false
+    },
+    {
+      "path": "historical_tests/legacy_test_review_launcher.py",
+      "classification": "HISTORICAL_OR_OMITTED_HELPER_NOT_EXECUTED",
+      "pass_credit": false
+    }
+  ]
+}

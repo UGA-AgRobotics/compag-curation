@@ -1,0 +1,69 @@
+{
+  "license": "CC-BY-4.0",
+  "members": [
+    {
+      "path": "annotations/points.xml",
+      "sha256": "3955c15a89c13faf995cc639543549a8e4fb335dc96593436f2df8c0481af863",
+      "size_bytes": 234
+    },
+    {
+      "path": "canonical_review_request_example.csv",
+      "sha256": "3a5cd6ae66546c1181c4bd0f13a90b4d06bbb6ea64938bce5ca9e0f13a9aa032",
+      "size_bytes": 687
+    },
+    {
+      "path": "canonical_reviewed_example.csv",
+      "sha256": "7b0f78dd0b074791886136c48b5982526d7d785c09a7cce077e8007a3afbf5fa",
+      "size_bytes": 713
+    },
+    {
+      "path": "data/images/synthetic-group-01__train.ppm",
+      "sha256": "c31f65a6a81f3adea847c4c134651980570e6af1c5a65bd3135b6dea4f53e27f",
+      "size_bytes": 44971
+    },
+    {
+      "path": "data/images/synthetic-group-02__train.ppm",
+      "sha256": "c8fce825be73d5b365fd32f6b038fa43a10798485208ad887927d6af6097f8a3",
+      "size_bytes": 44979
+    },
+    {
+      "path": "data/images/synthetic-group-03__train.ppm",
+      "sha256": "8d84a2820fe805318674aba55a80da7696d0ddc7aa848e4fbe10d6daf02574b8",
+      "size_bytes": 44979
+    },
+    {
+      "path": "data/images/synthetic-group-04__train.ppm",
+      "sha256": "9fc78b8650143a14eb017d9f50950e13b7ce636ff9e04d18e3e4dfd653182b6c",
+      "size_bytes": 44979
+    },
+    {
+      "path": "data/images/synthetic-group-05__train.ppm",
+      "sha256": "e2b6493b6435605f813e1895ba60df4440c2894cc54c6d2290c3b09359802374",
+      "size_bytes": 44975
+    },
+    {
+      "path": "data/images/synthetic-group-06__train.ppm",
+      "sha256": "c5209faac8a8ccc7931eb569aa7554bc2697a18bfe8e94afc97d90a3d55ebffb",
+      "size_bytes": 44979
+    },
+    {
+      "path": "data/inference_images/synthetic-heldout__card.ppm",
+      "sha256": "2d2e0e2d8846044f7e159e9ed0e741c3c3274f974ae47b99d771ee8896cde502",
+      "size_bytes": 44979
+    },
+    {
+      "path": "review_request_example.csv",
+      "sha256": "56a7b214a5abfe49fadbcaac9094d11ff13f794f5a47c8c70cfdfe890e9802a5",
+      "size_bytes": 2383
+    },
+    {
+      "path": "reviewed_example.csv",
+      "sha256": "7d2f42021342d195da0b5d9938f9925a5dbfd357f60d94e61a3d0c3002582b19",
+      "size_bytes": 2399
+    }
+  ],
+  "research_data_derivative": false,
+  "schema": "compag-curation-public-example-fixture/v1",
+  "source": "DETERMINISTIC_FROM_SCRATCH_SYNTHETIC",
+  "status": "PASS"
+}

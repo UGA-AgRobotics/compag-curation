@@ -1,0 +1,7 @@
+# COMPAG Curation 1.9.4rc9 — browser-first onboarding revision R3
+
+Run `python3 start_compag.py` from a GitHub clone to open a step-by-step local browser page. The guide accepts the four matching Release files as browser uploads or from an existing local folder and checks them against fixed SHA-256 identities (and checks the Release manifest when supplied). It runs the existing pinned GPU installer and doctor, prepares the ten example cards, downloads and verifies official SAM2 and ResNet assets, and offers full-card inference on an example card or one uploaded JPG/PNG photo. After inference, the existing candidate reviewer opens in another browser tab. The user returns to the guide for explicit XGBoost training from eligible saved decisions, then starts another card with the latest trained model selected by default. Interrupted inference can resume, and uploaded files and saved sessions remain in private local folders outside the source repository. The terminal menu remains available through `python3 start_compag.py --text`.
+
+The application modules under `src/compag_curation`, the wheel `compag_curation-1.9.4rc9-py3-none-any.whl`, the native r92 model ZIP, and the ten-photo ZIP are unchanged from rc9 R1/R2. The external YOLO segmentation checkpoint remains optional and outside the public Release; its scientific route and decision policy are unchanged.
+
+This is a local delivery candidate, not a claim that a GitHub Release is live. Software checks do not establish biological accuracy or independent human review.

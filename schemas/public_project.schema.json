@@ -1,0 +1,280 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:compag-curation:public-project:v2",
+  "title": "COMPAG curation public project",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "project", "paths", "execution", "assets"],
+  "$defs": {
+    "relativePath": {
+      "type": "string",
+      "pattern": "^(?:[A-Za-z0-9][A-Za-z0-9._-]{0,254}/)*[A-Za-z0-9][A-Za-z0-9._-]{0,254}$"
+    },
+    "balancedExecution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile", "device", "spatial_mode", "seed", "tile_size", "tile_overlap", "points_per_side", "points_per_batch", "pred_iou_threshold", "stability_threshold", "max_proposals_per_tile", "min_mask_area"],
+      "properties": {
+        "profile": {"const": "public-safe-balanced-v1"},
+        "device": {"const": "cpu"},
+        "spatial_mode": {"const": "tiled"},
+        "seed": {"const": 42},
+        "tile_size": {"const": 512},
+        "tile_overlap": {"const": 64},
+        "points_per_side": {"type": "integer", "minimum": 2, "maximum": 64},
+        "points_per_batch": {"type": "integer", "minimum": 1, "maximum": 512},
+        "pred_iou_threshold": {"type": "number", "minimum": 0, "maximum": 1},
+        "stability_threshold": {"type": "number", "minimum": 0, "maximum": 1},
+        "max_proposals_per_tile": {"type": "integer", "minimum": 2, "maximum": 500},
+        "min_mask_area": {"type": "integer", "minimum": 0, "maximum": 262144}
+      }
+    },
+    "canonicalExecution": {
+      "type": "object",
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "profile": {"const": "canonical-xgb-recall-cpu-v1"},
+            "device": {"const": "cpu"}
+          }
+        },
+        {
+          "properties": {
+            "profile": {"const": "canonical-xgb-recall-gpu-v1"},
+            "device": {"const": "cuda"}
+          }
+        },
+        {
+          "properties": {
+            "profile": {"const": "efficient-xgb-recall-gpu-v1"},
+            "device": {"const": "cuda"}
+          }
+        }
+      ],
+      "required": [
+        "profile", "device", "spatial_mode", "seed", "tile_size", "tile_overlap", "tile_stride",
+        "tile_edge_alignment", "tile_padding", "tile_format", "proposal_backend",
+        "proposal_scales", "points_per_side", "points_per_batch", "pred_iou_threshold",
+        "stability_threshold", "crop_n_layers", "crop_n_points_downscale_factor",
+        "crop_overlap_ratio", "exclude_largest_mask", "max_proposals_per_tile",
+        "min_mask_area", "feature_mode", "feature_crop_scales", "embedding_backbone",
+        "embedding_dimensions", "masked_crop_padding", "pca_components",
+        "group_test_fraction", "group_cv_splits", "hyperparameter_search_iterations",
+        "early_stopping_rounds", "inner_validation_fraction", "review_accept_weight",
+        "review_flip_weight", "review_suspect_weight", "review_skip_weight", "safe_smote", "scale_pos_weight",
+        "inference_threshold", "nms_iou_threshold", "yolo_enabled"
+      ],
+      "properties": {
+        "profile": {"enum": ["canonical-xgb-recall-cpu-v1", "canonical-xgb-recall-gpu-v1", "efficient-xgb-recall-gpu-v1"]},
+        "device": {"enum": ["cpu", "cuda"]},
+        "spatial_mode": {"const": "tiled"},
+        "seed": {"const": 42},
+        "tile_size": {"const": 512},
+        "tile_overlap": {"const": 0},
+        "tile_stride": {"const": 512},
+        "tile_edge_alignment": {"const": "far-edge"},
+        "tile_padding": {"const": "bottom-right-edge-value"},
+        "tile_format": {"const": "jpg"},
+        "proposal_backend": {"const": "sam2-amg"},
+        "proposal_scales": {"const": [1.0]},
+        "points_per_side": {"const": 64},
+        "points_per_batch": {"const": 512},
+        "pred_iou_threshold": {"const": 0.8},
+        "stability_threshold": {"const": 0.88},
+        "crop_n_layers": {"const": 0},
+        "crop_n_points_downscale_factor": {"const": 2},
+        "crop_overlap_ratio": {"const": 0.4},
+        "exclude_largest_mask": {"const": false},
+        "max_proposals_per_tile": {"const": 500},
+        "min_mask_area": {"const": 0},
+        "feature_mode": {"const": "ultra"},
+        "feature_crop_scales": {"const": [0.67, 0.8, 1.0, 1.25]},
+        "embedding_backbone": {"const": "resnet50-imagenet1k-v2"},
+        "embedding_dimensions": {"const": 2048},
+        "masked_crop_padding": {"const": 0.1},
+        "pca_components": {"const": 32},
+        "group_test_fraction": {"const": 0.2},
+        "group_cv_splits": {"const": 5},
+        "hyperparameter_search_iterations": {"const": 30},
+        "early_stopping_rounds": {"const": 30},
+        "inner_validation_fraction": {"const": 0.3},
+        "review_accept_weight": {"const": 1.0},
+        "review_flip_weight": {"const": 1.0},
+        "review_suspect_weight": {"const": 0.4},
+        "review_skip_weight": {"const": 0.0},
+        "safe_smote": {"const": true},
+        "scale_pos_weight": {"const": 1.0},
+        "inference_threshold": {"const": 0.5},
+        "nms_iou_threshold": {"const": 0.5},
+        "yolo_enabled": {"const": false}
+      }
+    },
+    "fullImageExecution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile", "device", "spatial_mode", "seed", "tile_size", "tile_overlap", "tile_stride",
+        "tile_edge_alignment", "tile_padding", "tile_format", "proposal_backend",
+        "proposal_scales", "points_per_side", "points_per_batch", "execution_points_per_batch", "pred_iou_threshold",
+        "stability_threshold", "crop_n_layers", "crop_n_points_downscale_factor",
+        "crop_overlap_ratio", "exclude_largest_mask", "max_proposals_per_tile",
+        "max_proposals_per_image", "min_mask_area", "feature_mode", "feature_crop_scales",
+        "embedding_backbone", "embedding_dimensions", "masked_crop_padding", "pca_components",
+        "group_test_fraction", "group_cv_splits", "hyperparameter_search_iterations",
+        "early_stopping_rounds", "inner_validation_fraction", "review_accept_weight",
+        "review_flip_weight", "review_suspect_weight", "review_skip_weight", "safe_smote",
+        "scale_pos_weight", "inference_threshold", "nms_iou_threshold", "yolo_enabled"
+      ],
+      "properties": {
+        "profile": {"const": "full-image-multiscale-xgb-recall-gpu-v1"},
+        "device": {"const": "cuda"},
+        "spatial_mode": {"const": "full-image-multiscale"},
+        "seed": {"const": 42},
+        "tile_size": {"const": 512},
+        "tile_overlap": {"const": 0},
+        "tile_stride": {"const": 512},
+        "tile_edge_alignment": {"const": "far-edge"},
+        "tile_padding": {"const": "bottom-right-edge-value"},
+        "tile_format": {"const": "jpg"},
+        "proposal_backend": {"const": "sam2-amg"},
+        "proposal_scales": {"const": [1.0]},
+        "points_per_side": {"const": 64},
+        "points_per_batch": {"const": 512},
+        "execution_points_per_batch": {"const": 8},
+        "pred_iou_threshold": {"const": 0.8},
+        "stability_threshold": {"const": 0.88},
+        "crop_n_layers": {"const": 2},
+        "crop_n_points_downscale_factor": {"const": 1},
+        "crop_overlap_ratio": {"const": 0.3413333333333333},
+        "exclude_largest_mask": {"const": false},
+        "max_proposals_per_tile": {"const": 500},
+        "max_proposals_per_image": {"const": 1000},
+        "min_mask_area": {"const": 0},
+        "feature_mode": {"const": "ultra"},
+        "feature_crop_scales": {"const": [0.67, 0.8, 1.0, 1.25]},
+        "embedding_backbone": {"const": "resnet50-imagenet1k-v2"},
+        "embedding_dimensions": {"const": 2048},
+        "masked_crop_padding": {"const": 0.1},
+        "pca_components": {"const": 32},
+        "group_test_fraction": {"const": 0.2},
+        "group_cv_splits": {"const": 5},
+        "hyperparameter_search_iterations": {"const": 30},
+        "early_stopping_rounds": {"const": 30},
+        "inner_validation_fraction": {"const": 0.3},
+        "review_accept_weight": {"const": 1.0},
+        "review_flip_weight": {"const": 1.0},
+        "review_suspect_weight": {"const": 0.4},
+        "review_skip_weight": {"const": 0.0},
+        "safe_smote": {"const": true},
+        "scale_pos_weight": {"const": 1.0},
+        "inference_threshold": {"const": 0.5},
+        "nms_iou_threshold": {"const": 0.5},
+        "yolo_enabled": {"const": false}
+      }
+    },
+    "balancedAssets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checkpoint", "checkpoint_sha256", "sam2_config", "sam2_config_sha256", "sam2_config_locator"],
+      "properties": {
+        "checkpoint": {"$ref": "#/$defs/relativePath"},
+        "checkpoint_sha256": {"const": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69"},
+        "sam2_config": {"$ref": "#/$defs/relativePath"},
+        "sam2_config_sha256": {"const": "f932eac1c6241e910031b2f000a81cd9f8a8d4896e2277ab5ffb721f378b188d"},
+        "sam2_config_locator": {"const": "configs/sam2.1/sam2.1_hiera_t"}
+      }
+    },
+    "canonicalAssets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checkpoint", "checkpoint_sha256", "sam2_config", "sam2_config_sha256", "sam2_config_locator", "embedding_weights", "embedding_weights_sha256"],
+      "properties": {
+        "checkpoint": {"$ref": "#/$defs/relativePath"},
+        "checkpoint_sha256": {"const": "2647878d5dfa5098f2f8649825738a9345572bae2d4350a2468587ece47dd318"},
+        "sam2_config": {"$ref": "#/$defs/relativePath"},
+        "sam2_config_sha256": {"const": "1dbd6cb6dfebeaf588c7006ee222c6efbfa9049a7ad472a3cdfb2f5d919e8107"},
+        "sam2_config_locator": {"const": "configs/sam2.1/sam2.1_hiera_l"},
+        "embedding_weights": {"$ref": "#/$defs/relativePath"},
+        "embedding_weights_sha256": {"const": "11ad3fa62ca79e40addfd354a8ec4b7c75143b3038b8d2a807fbc68deab379ca"}
+      }
+    },
+    "efficientAssets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checkpoint", "checkpoint_sha256", "sam2_config", "sam2_config_sha256", "sam2_config_locator", "embedding_weights", "embedding_weights_sha256"],
+      "properties": {
+        "checkpoint": {"$ref": "#/$defs/relativePath"},
+        "checkpoint_sha256": {"const": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69"},
+        "sam2_config": {"$ref": "#/$defs/relativePath"},
+        "sam2_config_sha256": {"const": "f932eac1c6241e910031b2f000a81cd9f8a8d4896e2277ab5ffb721f378b188d"},
+        "sam2_config_locator": {"const": "configs/sam2.1/sam2.1_hiera_t"},
+        "embedding_weights": {"$ref": "#/$defs/relativePath"},
+        "embedding_weights_sha256": {"const": "11ad3fa62ca79e40addfd354a8ec4b7c75143b3038b8d2a807fbc68deab379ca"}
+      }
+    }
+  },
+  "properties": {
+    "schema": {"const": "compag-curation-public-project/v2"},
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {"name": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"}}
+    },
+    "paths": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["images", "inference_images", "annotations", "asset_root"],
+      "properties": {
+        "images": {"$ref": "#/$defs/relativePath"},
+        "inference_images": {"$ref": "#/$defs/relativePath"},
+        "annotations": {
+          "oneOf": [
+            {"const": ""},
+            {"$ref": "#/$defs/relativePath"}
+          ]
+        },
+        "asset_root": {"$ref": "#/$defs/relativePath"}
+      }
+    },
+    "execution": {"type": "object"},
+    "assets": {"type": "object"}
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "execution": {"$ref": "#/$defs/balancedExecution"},
+        "assets": {"$ref": "#/$defs/balancedAssets"}
+      }
+    },
+    {
+      "properties": {
+        "execution": {
+          "allOf": [
+            {"$ref": "#/$defs/canonicalExecution"},
+            {"properties": {"profile": {"enum": ["canonical-xgb-recall-cpu-v1", "canonical-xgb-recall-gpu-v1"]}}}
+          ]
+        },
+        "assets": {"$ref": "#/$defs/canonicalAssets"}
+      }
+    },
+    {
+      "properties": {
+        "execution": {
+          "allOf": [
+            {"$ref": "#/$defs/canonicalExecution"},
+            {"properties": {"profile": {"const": "efficient-xgb-recall-gpu-v1"}}}
+          ]
+        },
+        "assets": {"$ref": "#/$defs/efficientAssets"}
+      }
+    },
+    {
+      "properties": {
+        "execution": {"$ref": "#/$defs/fullImageExecution"},
+        "assets": {"$ref": "#/$defs/canonicalAssets"}
+      }
+    }
+  ]
+}

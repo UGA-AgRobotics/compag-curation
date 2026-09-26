@@ -1,0 +1,120 @@
+{
+  "schema": "compag-curation-domain-config/v2",
+  "fixture_classification": "SYNTHETIC_NON_SCIENTIFIC_TEST_FIXTURE",
+  "execution": {
+    "authorized": false,
+    "allow_download": false,
+    "output_collision": "fail"
+  },
+  "notifications": {
+    "enabled": false
+  },
+  "workflows": {
+    "propose": {
+      "variant": "sam2-proposals",
+      "images": {"path": "synthetic/tiles", "kind": "directory", "role": "synthetic-images"},
+      "output": {"path": "synthetic/out/proposals", "kind": "directory", "role": "synthetic-proposal-output"},
+      "sam2_package_root": {"path": "synthetic/assets/sam2-package", "kind": "directory", "role": "synthetic-sam2-package"},
+      "sam2_checkpoint": {"path": "synthetic/assets/sam2.ckpt", "role": "synthetic-model"},
+      "sam2_config": {"path": "synthetic/assets/sam2-package/configs/sam2-config.yaml", "role": "synthetic-model-config"},
+      "device": "cpu"
+    },
+    "extract-features": {
+      "variant": "coco-features",
+      "image_name": "IMG_1",
+      "mode": "xgb_recall",
+      "device": "cpu",
+      "original_coco": {"path": "synthetic/original-annotations.json", "role": "synthetic-original-annotations"},
+      "coco_annotations": {"path": "synthetic/tiled-annotations.json", "role": "synthetic-tiled-annotations"},
+      "detections": {"path": "synthetic/detections.csv", "role": "synthetic-detections"},
+      "review_labels": {"path": "synthetic/review-labels.csv", "role": "synthetic-review-labels"},
+      "tiles": {"path": "synthetic/tiles", "kind": "directory", "role": "synthetic-images"},
+      "sam2_checkpoint": {"path": "synthetic/assets/sam2.ckpt", "role": "synthetic-model"},
+      "model_root": {"path": "synthetic/existing-models", "kind": "directory", "role": "synthetic-existing-models"},
+      "previous_split_manifest": {"path": "synthetic/previous-split.json", "role": "synthetic-previous-split"},
+      "merged_original_coco": {"path": "synthetic/out/feature-pipeline/merged-original.json", "role": "synthetic-merged-original"},
+      "merged_tiled_coco": {"path": "synthetic/out/feature-pipeline/merged-tiled.json", "role": "synthetic-merged-tiled"},
+      "round_new_ids": {"path": "synthetic/out/feature-pipeline/round-new-ids.json", "role": "synthetic-new-identifiers"},
+      "split_manifest": {"path": "synthetic/out/feature-pipeline/split.json", "role": "synthetic-split-output"},
+      "prototype": {"path": "synthetic/out/feature-pipeline/prototype.csv", "role": "synthetic-prototype-output"},
+      "pca": {"path": "synthetic/out/feature-pipeline/pca.npz", "role": "synthetic-transform-output"},
+      "used_ids": {"path": "synthetic/out/feature-pipeline/used-ids.json", "role": "synthetic-used-identifiers"},
+      "positive_embeddings": {"path": "synthetic/out/feature-pipeline/positive-embeddings.npy", "role": "synthetic-positive-embeddings"},
+      "all_embeddings": {"path": "synthetic/out/feature-pipeline/all-embeddings.npy", "role": "synthetic-all-embeddings"},
+      "pack": {"path": "synthetic/out/feature-pipeline/foldsafe-pack.joblib", "role": "synthetic-foldsafe-pack"},
+      "output": {"path": "synthetic/out/feature-pipeline/features.csv", "role": "synthetic-feature-output"},
+      "decision_threshold": 0.5
+    },
+    "review": {
+      "variant": "al-review-ui",
+      "image_root": {"path": "synthetic/review-root", "kind": "directory", "role": "synthetic-review-image-root"},
+      "current_image": "IMG_1",
+      "review_mode": "xgb_recall",
+      "detections": {"path": "synthetic/review-root/IMG_1/run_xgb_recall/detections.csv", "role": "synthetic-detections"},
+      "images": {"path": "synthetic/review-root/IMG_1/tiles", "kind": "directory", "role": "synthetic-images"},
+      "review_output": {"path": "synthetic/out/review.csv", "role": "synthetic-review-output"},
+      "host": "127.0.0.1",
+      "port": 8050
+    },
+    "train": {
+      "variant": "xgb-main",
+      "feature_table": {"path": "synthetic/features.csv", "role": "synthetic-features"},
+      "split_manifest": {"path": "synthetic/split.json", "role": "synthetic-split"},
+      "hybrid_previous_tile_predictions": {"path": "synthetic/prior/hybrid-tile-predictions.csv", "role": "synthetic-hybrid-prior-predictions"},
+      "hybrid_previous_threshold": {"path": "synthetic/prior/hybrid-threshold.json", "role": "synthetic-hybrid-prior-threshold"},
+      "augmented_previous_tile_predictions": {"path": "synthetic/prior/augmented-tile-predictions.csv", "role": "synthetic-augmented-prior-predictions"},
+      "augmented_previous_threshold": {"path": "synthetic/prior/augmented-threshold.json", "role": "synthetic-augmented-prior-threshold"},
+      "model_output": {"path": "synthetic/out/xgb-model", "kind": "directory", "role": "synthetic-model-output"},
+      "seed": 42,
+      "device": "cpu",
+      "thread_count": 1,
+      "decision_threshold": 0.5
+    },
+    "infer": {
+      "variant": "sam2-xgb",
+      "images": {"path": "synthetic/tiles", "kind": "directory", "role": "synthetic-images"},
+      "output": {"path": "synthetic/out/predictions", "kind": "directory", "role": "synthetic-prediction-output"},
+      "sam2_package_root": {"path": "synthetic/assets/sam2-package", "kind": "directory", "role": "synthetic-sam2-package"},
+      "sam2_checkpoint": {"path": "synthetic/assets/sam2.ckpt", "role": "synthetic-model"},
+      "sam2_config": {"path": "synthetic/assets/sam2-package/configs/sam2-config.yaml", "role": "synthetic-model-config"},
+      "prototype": {"path": "synthetic/assets/prototype.csv", "role": "synthetic-prototype"},
+      "padded_prototype": {"path": "synthetic/assets/prototype-padded.csv", "role": "synthetic-padded-prototype"},
+      "pca": {"path": "synthetic/assets/pca.npz", "role": "synthetic-transform"},
+      "xgb_model": {"path": "synthetic/assets/model.ubj", "role": "synthetic-model"},
+      "embed_backbone": "resnet50",
+      "embed_backbone_weights": {"path": "synthetic/assets/resnet50.pth", "role": "synthetic-model"},
+      "device": "cpu",
+      "decision_threshold": 0.5,
+      "mode": "xgb_recall",
+      "save_all": true,
+      "sam2_policy": "both",
+      "yolo_confidence": 0.20,
+      "yolo_iou": 0.60,
+      "detector_policy": "hybrid",
+      "detector_missing": "ignore",
+      "detector_threshold": 0.5,
+      "hybrid_yolo_bias": 0.8
+    },
+    "evaluate": {
+      "variant": "coverage-basic",
+      "image_id": "synthetic-evaluation-card-a",
+      "predictions": {"path": "synthetic/predictions.csv", "role": "synthetic-predictions"},
+      "annotations": {"path": "synthetic/annotations.json", "role": "synthetic-annotations"},
+      "evaluator_script": {"path": "synthetic/evaluator.py", "role": "synthetic-evaluator"},
+      "tile_index": {"path": "synthetic/tile-index.csv", "role": "synthetic-tile-index"},
+      "output": {"path": "synthetic/out/evaluation", "kind": "directory", "role": "synthetic-evaluation-output"},
+      "decision_threshold": 0.5
+    },
+    "transfer": {
+      "variant": "result-tree",
+      "source": {"path": "synthetic/results", "kind": "directory", "role": "synthetic-transfer-source"},
+      "destination": {"path": "synthetic/out/copied-results", "kind": "directory", "role": "synthetic-transfer-output"}
+    },
+    "report": {
+      "variant": "dataset-summary",
+      "source_tables": {"path": "synthetic/tables", "kind": "directory", "role": "synthetic-aggregate-tables"},
+      "output": {"path": "synthetic/out/report", "kind": "directory", "role": "synthetic-report-output"},
+      "decision_threshold": 0.5
+    }
+  }
+}
