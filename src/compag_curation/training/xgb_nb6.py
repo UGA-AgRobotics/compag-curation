@@ -343,7 +343,7 @@ def source_algorithm_0006_0000(
 
     @contextmanager
     def tqdm_joblib(tqdm_object):
-        """نمایش progress برای joblib (مثل GridSearchCV)"""
+        """Display joblib progress, for example during GridSearchCV."""
 
         class TqdmBatchCompletionCallback(joblib.parallel.BatchCompletionCallBack):
 
@@ -904,7 +904,7 @@ def source_algorithm_0006_0001(
 
     @contextmanager
     def tqdm_joblib(tqdm_object):
-        """نمایش progress برای joblib (مثل GridSearchCV)"""
+        """Display joblib progress, for example during GridSearchCV."""
 
         class TqdmBatchCompletionCallback(joblib.parallel.BatchCompletionCallBack):
 
@@ -1473,7 +1473,7 @@ def source_algorithm_0006_0002(
 
     @contextmanager
     def tqdm_joblib(tqdm_object):
-        """نمایش progress برای joblib (مثل GridSearchCV)"""
+        """Display joblib progress, for example during GridSearchCV."""
 
         class TqdmBatchCompletionCallback(joblib.parallel.BatchCompletionCallBack):
 
@@ -1621,7 +1621,7 @@ def source_algorithm_0006_0002(
     services.report(f'[CV] TEST  groups → total={len(gte)} | pos={int(gte.sum())} | neg={int((gte == 0).sum())}')
 
     def build_smote(y_like: np.ndarray, pos_label: int=POS_LABEL, sampling_strategy: float=0.4):
-        """بر اساس تعدادِ مثبت\u200cها، SMOTE امن می\u200cسازد؛ اگر مثبت\u200cها خیلی کم باشند None برمی\u200cگرداند."""
+        """Build SMOTE from the positive sample count; return None if there are too few positives."""
         pos_count = int((y_like == pos_label).sum())
         if pos_count < 2:
             return None

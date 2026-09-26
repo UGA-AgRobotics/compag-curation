@@ -59,7 +59,6 @@
     "README.md",
     "SECURITY.md",
     "START_HERE_EN.md",
-    "START_HERE_FA.md",
     "SUPPORT.md",
     "THIRD_PARTY_NOTICES.md",
     "WHAT_CHANGED_RC3_TO_RC4_EN.md",
@@ -437,8 +436,8 @@
     "tools/train_paper_xgb_round.py",
     "tools/yolo_segment_backend.py"
   ],
-  "paths_sha256": "f8c35a02eb1c2f90e5485e7d7db1f289dd5001a476d88244da0a6d0a5aaf078a",
+  "paths_sha256": "4e1607e589c8f3ce0f0111ce271fd083f4c87f650ee582a61a786dfab757a03c",
   "parent_source_zip_sha256": "00f6a49a83f0801636a90ed240da269d46369ea277ae3b3338c3ac2fe64336e4",
   "bundled_asset_count": 4,
-  "file_count": 431
+  "file_count": 430
 }

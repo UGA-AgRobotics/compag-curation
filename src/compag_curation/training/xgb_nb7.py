@@ -612,7 +612,7 @@ def source_algorithm_0007_0000(
     y = df['label'].astype(int).values
 
     def pick_groups_tile_balanced(groups_vec: np.ndarray, test_frac: float=0.2, random_state: int=42, tol: float=0.01, max_tries: int=2000):
-        """زیرمجموعه\u200cای از گروه\u200cها را برای تست انتخاب می\u200cکند تا مجموع تایل\u200cها ≈ test_frac کل شود (بدون شکستن گروه\u200cها)."""
+        """Select whole test groups whose tile count approximates test_frac of all tiles."""
         uniq, inv = np.unique(groups_vec, return_inverse=True)
         counts = np.bincount(inv).astype(int)
         total = int(counts.sum())
@@ -1733,7 +1733,7 @@ def source_algorithm_0007_0006(
         return (Xo, yo, wo, go)
 
     def apply_augs_in_3A(X_df, y_np, w_np, g_np, cfg, random_state=42):
-        """Impute -> تعیین ستون\u200cهای پیوسته -> mixup -> dropout -> jitter -> بازگشت DataFrame/np"""
+        """Impute -> identify continuous columns -> mixup -> dropout -> jitter -> return DataFrame/NumPy arrays."""
         rs = np.random.RandomState(random_state)
         imp = SimpleImputer(strategy='median')
         X_imp = imp.fit_transform(X_df)
